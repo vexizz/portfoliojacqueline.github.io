@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>One-Page Checkout · Your Name</title>
+  <meta name="description" content="Case study: folding a five-step checkout into one page, lifting conversion by 12%.">
+  <meta name="theme-color" content="#f3f2ee" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#161615" media="(prefers-color-scheme: dark)">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Silkscreen&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    // Marks JS as on (for scroll reveals) and applies saved Settings
+    // (motion, text size, contrast, cursor) before the page paints. If we
+    // arrived through a page transition, cover the page in green so it can
+    // slide away on load.
+    (function () {
+      var html = document.documentElement, prefs = {};
+      html.classList.add('js');
+      try { prefs = JSON.parse(localStorage.getItem('site-prefs')) || {}; } catch (e) {}
+      if (prefs.motion) html.setAttribute('data-motion', prefs.motion);
+      if (prefs.text && prefs.text !== 'default') html.setAttribute('data-text', prefs.text);
+      if (prefs.contrast) html.setAttribute('data-contrast', 'high');
+      if (prefs.cursor === false) html.setAttribute('data-cursor', 'off');
+      var full = prefs.motion ? prefs.motion === 'full' : !matchMedia('(prefers-reduced-motion: reduce)').matches;
+      try {
+        var pt = sessionStorage.getItem('pt');
+        sessionStorage.removeItem('pt');
+        if (pt !== null && full) {
+          html.classList.add('pt-enter');
+          html.setAttribute('data-pt', pt);
+        }
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+  <!-- PROJECT PAGE. See project-fintech.html for notes on the structure. -->
+
+  <!-- ============================ HEADER ============================
+       Same on every page; only aria-current (the green pill) moves. -->
+  <header class="site-header site-header--over" data-over>
+    <div class="wrap">
+      <a href="index.html" class="logo" aria-label="Your Name, home" data-pt="hello">
+        <span class="logo-dot"></span>Your Name
+      </a>
+      <span class="label header-time" data-clock data-tz="Europe/London">London</span>
+      <nav aria-label="Main">
+        <ul class="nav">
+          <li><a href="index.html" aria-current="page" data-pt="work"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14V7M8 7C8 4.2 6.2 2.5 2.5 2.5 2.5 5.5 4.6 7 8 7ZM8 9.5c0-2.6 2-4.6 5.5-4.6 0 2.8-2 4.6-5.5 4.6Z"/></svg><span class="nav-label">work</span></a></li>
+          <li><a href="play.html" data-pt="play"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M2.3 6.5c3.4 1.2 8 1.2 11.4 0M8 2c-2.2 2.6-2.2 9.4 0 12M8 2c2.2 2.6 2.2 9.4 0 12"/></svg><span class="nav-label">play</span></a></li>
+          <li><a href="about.html" data-pt="about"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="4.8" r="2.6"/><path d="M3 14c0-3 2.2-5.2 5-5.2s5 2.2 5 5.2"/></svg><span class="nav-label">about</span></a></li>
+          <li><button type="button" class="nav-settings" data-settings aria-haspopup="dialog" aria-expanded="false" aria-label="Settings"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4.5h7.5M13 4.5h1M2 11.5h1.5M7 11.5h7"/><circle class="knob-a" cx="11.2" cy="4.5" r="1.7"/><circle class="knob-b" cx="5.3" cy="11.5" r="1.7"/></svg><span class="nav-label">settings</span></button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============================= HERO ============================
+         Green gradient band. Title = upright word + italic word.
+         The kicker line lists type of work, domain, length and status. -->
+    <section class="cs-hero" data-dark data-glow>
+      <div class="wrap">
+        <a href="index.html#work" class="back"><span class="arrow">←</span> All work</a>
+        <h1 class="cs-title"><span data-split>One-page</span> <em data-split>checkout</em></h1>
+        <p class="cs-kicker"><span>E-commerce</span><span>A/B tested</span><span>8 weeks</span><span>Shipped</span></p>
+      </div>
+    </section>
+
+    <div class="wrap cs-cover-wrap" data-reveal>
+      <figure class="shot cs-cover" data-lightbox data-cursor="Zoom">
+        <div class="shot-media"><span class="shot-placeholder">Hero image: the new checkout on desktop and mobile</span></div>
+      </figure>
+    </div>
+
+    <section class="wrap cs-intro">
+      <p class="cs-lead" data-reveal>Folding a five-step checkout into a single, calm page for a home-goods retailer, lifting conversion by 12% in the first month.</p>
+      <dl class="cs-meta" data-reveal>
+        <div><dt class="label">Role</dt><dd>Product Designer</dd></div>
+        <div><dt class="label">Team</dt><dd>1 PM, 3 engineers, 1 analyst</dd></div>
+        <div><dt class="label">Timeline</dt><dd>8 weeks · 2024</dd></div>
+        <div><dt class="label">Tools</dt><dd>Figma, Hotjar, Optimizely</dd></div>
+      </dl>
+    </section>
+
+    <!-- =========================== OVERVIEW ========================== -->
+    <section class="cs-section wrap">
+      <div class="cs-block">
+        <div class="cs-block-head" data-reveal><span class="label">01</span><h2>Overview <em>The challenge</em></h2></div>
+        <div class="cs-block-body" data-reveal style="--delay: 1">
+          <p>7 in 10 shoppers who reached checkout didn't finish. Each of the five steps reloaded the page, surprise delivery costs appeared at the very end, and account creation was mandatory.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================== DISCOVER ========================== -->
+    <section class="cs-section wrap">
+      <div class="cs-block">
+        <div class="cs-block-head" data-reveal><span class="label">02</span><h2>Discover <em>Watching people check out</em></h2></div>
+        <div class="cs-block-body" data-reveal style="--delay: 1">
+          <p>Session recordings and heatmaps showed the same story again and again: people hesitating at delivery costs and bouncing at the "create account" wall.</p>
+          <ul class="did-list">
+            <li>Reviewed 150 Hotjar session recordings and tagged friction moments</li>
+            <li>Mapped the existing flow step by step with every error state</li>
+            <li>Benchmarked 10 best-in-class checkouts</li>
+          </ul>
+        </div>
+      </div>
+      <div class="gallery">
+        <figure class="shot shot--half" data-lightbox data-cursor="Zoom" data-reveal>
+          <div class="shot-media"><span class="shot-placeholder">Old checkout: 5-step flow map</span></div>
+          <figcaption>The old flow: five pages, two surprises.</figcaption>
+        </figure>
+        <figure class="shot shot--half" data-lightbox data-cursor="Zoom" data-reveal style="--delay: 1">
+          <div class="shot-media"><span class="shot-placeholder">Heatmap of the delivery step</span></div>
+          <figcaption>Where attention (and patience) ran out.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============================ DESIGN =========================== -->
+    <section class="cs-section wrap">
+      <div class="cs-block">
+        <div class="cs-block-head" data-reveal><span class="label">03</span><h2>Design <em>Everything on one page</em></h2></div>
+        <div class="cs-block-body" data-reveal style="--delay: 1">
+          <p>The new checkout shows the full cost from the start, lets people check out as a guest, and reveals each section as the last one is completed, so it feels short without hiding anything.</p>
+          <ul class="did-list">
+            <li>Designed a progressive single-page layout with inline validation</li>
+            <li>Moved delivery costs into the basket so there are no surprises</li>
+            <li>Added guest checkout and Apple Pay / Google Pay express options</li>
+            <li>Wrote all microcopy and error messages</li>
+          </ul>
+        </div>
+      </div>
+      <div class="gallery">
+        <figure class="shot shot--two-thirds" data-lightbox data-cursor="Zoom" data-reveal>
+          <div class="shot-media"><span class="shot-placeholder">Desktop checkout: final design</span></div>
+          <figcaption>Desktop: one page, sections unfold as you go.</figcaption>
+        </figure>
+        <figure class="shot shot--third" data-lightbox data-cursor="Zoom" data-reveal style="--delay: 1">
+          <div class="shot-media"><span class="shot-placeholder">Mobile checkout</span></div>
+          <figcaption>Mobile: express pay first.</figcaption>
+        </figure>
+        <figure class="shot shot--full ratio-cinema" data-lightbox data-cursor="Zoom" data-reveal>
+          <div class="shot-media"><span class="shot-placeholder">Inline validation and error states</span></div>
+          <figcaption>Friendly, inline errors instead of a red banner at the top.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- =========================== RESULTS =========================== -->
+    <section class="cs-section wrap">
+      <div class="cs-block">
+        <div class="cs-block-head" data-reveal><span class="label">04</span><h2>Results <em>A/B tested, then shipped</em></h2></div>
+        <div class="cs-block-body" data-reveal style="--delay: 1">
+          <p>We ran a four-week A/B test against the old checkout before rolling the new one out to everyone.</p>
+          <div class="stats">
+            <div class="stat"><strong data-count="12" data-prefix="+" data-suffix="%">+12%</strong><span>Checkout conversion</span></div>
+            <div class="stat"><strong data-count="38" data-prefix="−" data-suffix="%">−38%</strong><span>Time to complete</span></div>
+            <div class="stat"><strong data-count="41" data-suffix="%">41%</strong><span>Used guest checkout</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= REFLECTION ========================== -->
+    <section class="cs-section wrap">
+      <div class="cs-block">
+        <div class="cs-block-head" data-reveal><span class="label">05</span><h2>Reflection <em>What I learned</em></h2></div>
+        <div class="cs-block-body" data-reveal style="--delay: 1">
+          <p>Small honesty fixes, like showing costs early, did as much as the big layout change. I'd test those quick wins on their own first next time.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= MORE PROJECTS ========================= -->
+    <section class="more" data-carousel aria-label="More projects">
+      <div class="wrap carousel-head">
+        <h2 class="section-title">More <em>work</em></h2>
+        <div class="carousel-btns">
+          <button class="carousel-btn" data-carousel-prev aria-label="Previous projects">←</button>
+          <button class="carousel-btn" data-carousel-next aria-label="Next projects">→</button>
+        </div>
+      </div>
+      <div class="carousel-track" data-cursor="Drag" tabindex="0">
+        <a href="project-medication.html" class="card" data-cursor="View">
+          <div class="card-media"><span class="card-placeholder">04</span></div>
+          <div class="card-info"><h3 class="card-title">Medication tracker</h3><span class="label">2023</span><p class="card-desc">A self-initiated study in accessible design for low-vision users.</p></div>
+        </a>
+        <a href="project-fintech.html" class="card" data-cursor="View">
+          <div class="card-media"><span class="card-placeholder">01</span></div>
+          <div class="card-info"><h3 class="card-title">Fintech onboarding</h3><span class="label">2025</span><p class="card-desc">Rethinking identity checks to cut sign-up drop-off by 34%.</p></div>
+        </a>
+        <a href="project-design-system.html" class="card" data-cursor="View">
+          <div class="card-media"><span class="card-placeholder">02</span></div>
+          <div class="card-info"><h3 class="card-title">Dashboard design system</h3><span class="label">2024</span><p class="card-desc">60+ components that got four product teams speaking one language.</p></div>
+        </a>
+        <a href="index.html#work" class="card card--all" data-cursor="All">
+          <div class="card-media"><span>All work →</span></div>
+          <div class="card-info"><h3 class="card-title">Back to everything</h3></div>
+        </a>
+      </div>
+      <div class="wrap"><div class="carousel-progress"><span></span></div></div>
+    </section>
+  </main>
+
+  <!-- ============================ FOOTER ============================
+       Footnote: contact pills, a giant soft wordmark that goes liquid
+       when you move across it, and the small print. Edit the links,
+       wordmark text and note below. -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <ul class="footer-pills">
+          <li><a class="pill" href="mailto:you@example.com" data-copy="you@example.com"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.8" y="3.2" width="12.4" height="9.6" rx="1.2"/><path d="m2.3 4 5.7 4.6L13.7 4"/></svg>email</a></li>
+          <li><a class="pill" href="resume.pdf"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 1.8h5.5L12.5 5v9.2H4Z"/><path d="M9.5 1.8V5h3M6.2 8h4.2M6.2 10.8h4.2"/></svg>résumé</a></li>
+          <li><a class="pill pill--icon" href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.8" y="1.8" width="12.4" height="12.4" rx="2"/><path d="M5 7v4.5M5 4.6v.1M7.8 11.5V7m0 2c0-1.2.8-2 1.9-2s1.6.8 1.6 2v2.5"/></svg></a></li>
+          <li><a class="pill pill--icon" href="https://x.com/your-handle" target="_blank" rel="noopener" aria-label="X"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.6 2.6h3.2l7.6 10.8h-3.2ZM13 2.6 9 7.2M7 8.8l-4 4.6"/></svg></a></li>
+        </ul>
+        <a href="#" class="to-top" aria-label="Back to top">↑</a>
+      </div>
+      <p class="wordmark" data-liquid aria-hidden="true">yourname</p>
+      <p class="footer-note">© <span data-year></span> Your Name. All rights reserved, a few left wild <span class="spark">✦</span> made by a human <span class="spark">✦</span> designed in London</p>
+    </div>
+    <svg class="liquid-defs" width="0" height="0" aria-hidden="true" focusable="false">
+      <filter id="liquid" x="-10%" y="-20%" width="120%" height="140%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.008 0.016" numOctaves="2" seed="4" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </svg>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

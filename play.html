@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Play · Your Name</title>
+  <meta name="description" content="Side projects, experiments and things Your Name makes for fun.">
+  <meta name="theme-color" content="#f3f2ee" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#161615" media="(prefers-color-scheme: dark)">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Silkscreen&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    // Marks JS as on (for scroll reveals) and applies saved Settings
+    // (motion, text size, contrast, cursor) before the page paints. If we
+    // arrived through a page transition, cover the page in green so it can
+    // slide away on load.
+    (function () {
+      var html = document.documentElement, prefs = {};
+      html.classList.add('js');
+      try { prefs = JSON.parse(localStorage.getItem('site-prefs')) || {}; } catch (e) {}
+      if (prefs.motion) html.setAttribute('data-motion', prefs.motion);
+      if (prefs.text && prefs.text !== 'default') html.setAttribute('data-text', prefs.text);
+      if (prefs.contrast) html.setAttribute('data-contrast', 'high');
+      if (prefs.cursor === false) html.setAttribute('data-cursor', 'off');
+      var full = prefs.motion ? prefs.motion === 'full' : !matchMedia('(prefers-reduced-motion: reduce)').matches;
+      try {
+        var pt = sessionStorage.getItem('pt');
+        sessionStorage.removeItem('pt');
+        if (pt !== null && full) {
+          html.classList.add('pt-enter');
+          html.setAttribute('data-pt', pt);
+        }
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- ============================ HEADER ============================
+       Same on every page; only aria-current (the green pill) moves. -->
+  <header class="site-header">
+    <div class="wrap">
+      <a href="index.html" class="logo" aria-label="Your Name, home" data-pt="hello">
+        <span class="logo-dot"></span>Your Name
+      </a>
+      <span class="label header-time" data-clock data-tz="Europe/London">London</span>
+      <nav aria-label="Main">
+        <ul class="nav">
+          <li><a href="index.html" data-pt="work"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14V7M8 7C8 4.2 6.2 2.5 2.5 2.5 2.5 5.5 4.6 7 8 7ZM8 9.5c0-2.6 2-4.6 5.5-4.6 0 2.8-2 4.6-5.5 4.6Z"/></svg><span class="nav-label">work</span></a></li>
+          <li><a href="play.html" aria-current="page" data-pt="play"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M2.3 6.5c3.4 1.2 8 1.2 11.4 0M8 2c-2.2 2.6-2.2 9.4 0 12M8 2c2.2 2.6 2.2 9.4 0 12"/></svg><span class="nav-label">play</span></a></li>
+          <li><a href="about.html" data-pt="about"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="4.8" r="2.6"/><path d="M3 14c0-3 2.2-5.2 5-5.2s5 2.2 5 5.2"/></svg><span class="nav-label">about</span></a></li>
+          <li><button type="button" class="nav-settings" data-settings aria-haspopup="dialog" aria-expanded="false" aria-label="Settings"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4.5h7.5M13 4.5h1M2 11.5h1.5M7 11.5h7"/><circle class="knob-a" cx="11.2" cy="4.5" r="1.7"/><circle class="knob-b" cx="5.3" cy="11.5" r="1.7"/></svg><span class="nav-label">settings</span></button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============================ INTRO ============================ -->
+    <section class="page-intro wrap">
+      <span class="label">Play</span>
+      <h1 class="page-title">
+        <span data-split>Things I make just</span>
+        <em class="voice" data-split>for fun.</em>
+      </h1>
+      <p class="play-lead">Illustrations, motion experiments, 3D doodles and photos. No briefs, no stakeholders, just curiosity.</p>
+    </section>
+
+    <!-- ============================= GRID ============================
+         A masonry grid: items flow into columns and keep their own shape.
+         Each item: set the shape with --ratio, the filter category with
+         data-tags, and replace the placeholder span with an <img>.
+         Clicking an item opens it large; nothing links away. -->
+    <section class="wrap play">
+      <div class="play-filters" role="group" aria-label="Filter" data-filter-group>
+        <button class="chip" data-filter="all" aria-pressed="true">everything</button>
+        <button class="chip" data-filter="illustration" aria-pressed="false">illustration</button>
+        <button class="chip" data-filter="motion" aria-pressed="false">motion</button>
+        <button class="chip" data-filter="3d" aria-pressed="false">3D</button>
+        <button class="chip" data-filter="photo" aria-pressed="false">photo</button>
+      </div>
+
+      <div class="play-grid">
+        <figure class="shot play-item" data-lightbox data-cursor="Zoom" data-tags="illustration" data-reveal>
+          <div class="shot-media" style="--ratio: 4 / 5"><span class="shot-placeholder">Poster series: city birds</span></div>
+          <figcaption><span>City birds poster</span><span class="label">Illustration</span></figcaption>
+        </figure>
+        <figure class="shot play-item" data-lightbox data-cursor="Zoom" data-tags="motion" data-reveal>
+          <div class="shot-media" style="--ratio: 1 / 1"><span class="shot-placeholder">Loop: bouncing type</span></div>
+          <figcaption><span>Bouncy type loop</span><span class="label">Motion</span></figcaption>
+        </figure>
+        <figure class="shot play-item" data-lightbox data-cursor="Zoom" data-tags="photo" data-reveal>
+          <div class="shot-media" style="--ratio: 3 / 4"><span class="shot-placeholder">Photo: morning market</span></div>
+          <figcaption><span>Morning market, Lisbon</span><span class="label">Photo</span></figcaption>
+        </figure>
+        <figure class="shot play-item" data-lightbox data-cursor="Zoom" data-tags="3d" data-reveal>
+          <div class="shot-media" style="--ratio: 4 / 3"><span class="shot-placeholder">3D: squishy buttons</span></div>
+          <figcaption><span>Squishy buttons</span><span class="label">3D</span></figcaption>
+        </figure>
+        <figure class="shot play-item" data-lightbox data-cursor="Zoom" data-tags="illustration" data-reveal>
+          <div class="shot-media" style="--ratio: 1 / 1"><span class="shot-placeholder">Sticker sheet</span></div>
+          <figcaption><span>Sticker sheet</span><span class="label">Illustration</span></figcaption>
+        </figure>
+        <figure class="shot play-item" data-lightbox data-cursor="Zoom" data-tags="motion" data-reveal>
+          <div class="shot-media" style="--ratio: 9 / 16"><span class="shot-placeholder">App micro-interaction</span></div>
+          <figcaption><span>Pull-to-refresh idea</span><span class="label">Motion</span></figcaption>
+        </figure>
+        <figure class="shot play-item" data-lightbox data-cursor="Zoom" data-tags="photo" data-reveal>
+          <div class="shot-media" style="--ratio: 4 / 3"><span class="shot-placeholder">Photo: shadows on a wall</span></div>
+          <figcaption><span>Afternoon shadows</span><span class="label">Photo</span></figcaption>
+        </figure>
+        <figure class="shot play-item" data-lightbox data-cursor="Zoom" data-tags="3d" data-reveal>
+          <div class="shot-media" style="--ratio: 4 / 5"><span class="shot-placeholder">3D: tiny desk scene</span></div>
+          <figcaption><span>Tiny desk</span><span class="label">3D</span></figcaption>
+        </figure>
+        <figure class="shot play-item" data-lightbox data-cursor="Zoom" data-tags="illustration" data-reveal>
+          <div class="shot-media" style="--ratio: 3 / 4"><span class="shot-placeholder">Zine cover</span></div>
+          <figcaption><span>Zine: "Small joys"</span><span class="label">Illustration</span></figcaption>
+        </figure>
+        <figure class="shot play-item" data-lightbox data-cursor="Zoom" data-tags="motion" data-reveal>
+          <div class="shot-media" style="--ratio: 16 / 9"><span class="shot-placeholder">Logo animation</span></div>
+          <figcaption><span>Logo sting for a friend's band</span><span class="label">Motion</span></figcaption>
+        </figure>
+        <figure class="shot play-item" data-lightbox data-cursor="Zoom" data-tags="photo" data-reveal>
+          <div class="shot-media" style="--ratio: 1 / 1"><span class="shot-placeholder">Photo: green door</span></div>
+          <figcaption><span>Green door collection</span><span class="label">Photo</span></figcaption>
+        </figure>
+        <figure class="shot play-item" data-lightbox data-cursor="Zoom" data-tags="3d" data-reveal>
+          <div class="shot-media" style="--ratio: 3 / 4"><span class="shot-placeholder">3D: chrome type</span></div>
+          <figcaption><span>Chrome letters</span><span class="label">3D</span></figcaption>
+        </figure>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================ FOOTER ============================
+       Footnote: contact pills, a giant soft wordmark that goes liquid
+       when you move across it, and the small print. Edit the links,
+       wordmark text and note below. -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <ul class="footer-pills">
+          <li><a class="pill" href="mailto:you@example.com" data-copy="you@example.com"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.8" y="3.2" width="12.4" height="9.6" rx="1.2"/><path d="m2.3 4 5.7 4.6L13.7 4"/></svg>email</a></li>
+          <li><a class="pill" href="resume.pdf"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 1.8h5.5L12.5 5v9.2H4Z"/><path d="M9.5 1.8V5h3M6.2 8h4.2M6.2 10.8h4.2"/></svg>résumé</a></li>
+          <li><a class="pill pill--icon" href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.8" y="1.8" width="12.4" height="12.4" rx="2"/><path d="M5 7v4.5M5 4.6v.1M7.8 11.5V7m0 2c0-1.2.8-2 1.9-2s1.6.8 1.6 2v2.5"/></svg></a></li>
+          <li><a class="pill pill--icon" href="https://x.com/your-handle" target="_blank" rel="noopener" aria-label="X"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.6 2.6h3.2l7.6 10.8h-3.2ZM13 2.6 9 7.2M7 8.8l-4 4.6"/></svg></a></li>
+        </ul>
+        <a href="#" class="to-top" aria-label="Back to top">↑</a>
+      </div>
+      <p class="wordmark" data-liquid aria-hidden="true">yourname</p>
+      <p class="footer-note">© <span data-year></span> Your Name. All rights reserved, a few left wild <span class="spark">✦</span> made by a human <span class="spark">✦</span> designed in London</p>
+    </div>
+    <svg class="liquid-defs" width="0" height="0" aria-hidden="true" focusable="false">
+      <filter id="liquid" x="-10%" y="-20%" width="120%" height="140%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.008 0.016" numOctaves="2" seed="4" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </svg>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
