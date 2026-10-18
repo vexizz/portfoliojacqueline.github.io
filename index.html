@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- EDIT: your name + one-line description (Google results and link previews) -->
+  <title>Your Name · Product Designer</title>
+  <meta name="description" content="Product designer making calm, useful products with a playful streak.">
+  <meta name="theme-color" content="#f3f2ee" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#161615" media="(prefers-color-scheme: dark)">
+
+  <!-- Fonts: Instrument Sans (body), Instrument Serif (accent), JetBrains Mono (labels) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Marks the page as JS-enabled so scroll reveals can start hidden. -->
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+  <!-- ============================ HEADER ============================ -->
+  <header class="site-header">
+    <div class="wrap">
+      <a href="index.html" class="logo" aria-label="Your Name, home">
+        <span class="logo-dot"></span>Your Name
+      </a>
+
+      <span class="label header-time" data-clock data-tz="Europe/London">London</span>
+
+      <nav aria-label="Main">
+        <ul class="nav">
+          <li><a href="index.html" aria-current="page">Work</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============================= HERO =============================
+         data-split: script.js wraps each letter so it can hop on hover.
+         Stickers: drag them around. Edit the text inside each one. -->
+    <section class="hero wrap">
+      <div class="stickers" aria-hidden="true">
+        <div class="sticker sticker--circle" data-drag style="left: 80%; top: 10%; --rot: -8deg;">hello!</div>
+        <div class="sticker sticker--pill sticker--desktop"   data-drag style="left: 68%; top: 30%; --rot: 6deg;">figma ♡</div>
+        <div class="sticker sticker--star"                    data-drag style="left: 90%; top: 38%;">✦</div>
+        <div class="sticker sticker--square sticker--desktop" data-drag style="left: 82%; top: 48%; --rot: 12deg;">☺</div>
+        <div class="sticker sticker--pill sticker--desktop"   data-drag style="left: 60%; top: 8%; --rot: -4deg;">✎ sketching</div>
+      </div>
+
+      <div class="hero-meta">
+        <span class="label status">Open to new roles</span>
+        <span class="label">Product Designer · Based in London</span>
+      </div>
+
+      <h1 class="hero-title">
+        <span data-split>Designing calm products with a</span>
+        <em class="voice" data-split>playful</em>
+        <span data-split>streak.</span>
+      </h1>
+
+      <div class="hero-foot">
+        <p class="hero-lead">
+          I'm Your Name. I turn tangled problems into clear, considered interfaces,
+          then sneak in a little delight.
+        </p>
+        <div class="hero-actions">
+          <a href="#work" class="btn btn-solid" data-magnetic>See the work <span class="arrow">↓</span></a>
+          <a href="contact.html" class="btn btn-ghost" data-magnetic>Say hi</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= WORK =============================
+         One <a class="card"> per project. Duplicate to add more.
+         Widths: card--wide / card--narrow alternate; card--offset staggers.
+         To add an image, replace the .card-placeholder span with:
+           <img src="images/cover.jpg" alt="Describe the image">
+         data-cursor sets the text shown in the cursor on hover. -->
+    <section id="work" class="section wrap">
+      <div class="section-head" data-reveal>
+        <h2 class="section-title">Selected work<sup>(04)</sup></h2>
+        <span class="label">2023 — Now</span>
+      </div>
+
+      <div class="work-grid">
+        <a href="project.html" class="card card--wide" data-cursor="View" data-reveal>
+          <div class="card-media" data-tilt><span class="card-placeholder">01</span></div>
+          <div class="card-info">
+            <h3 class="card-title">Fintech onboarding</h3>
+            <span class="label">2025</span>
+            <p class="card-desc">Rethinking identity checks to cut sign-up drop-off by 34%.</p>
+            <div class="card-tags"><span class="tag">Mobile</span><span class="tag">Research</span><span class="tag">0→1</span></div>
+          </div>
+        </a>
+
+        <a href="project.html" class="card card--narrow card--offset" data-cursor="View" data-reveal style="--delay: 1">
+          <div class="card-media" data-tilt><span class="card-placeholder">02</span></div>
+          <div class="card-info">
+            <h3 class="card-title">Dashboard design system</h3>
+            <span class="label">2024</span>
+            <p class="card-desc">60+ components that got four product teams speaking one language.</p>
+            <div class="card-tags"><span class="tag">SaaS</span><span class="tag">Systems</span></div>
+          </div>
+        </a>
+
+        <a href="project.html" class="card card--narrow" data-cursor="View" data-reveal>
+          <div class="card-media" data-tilt><span class="card-placeholder">03</span></div>
+          <div class="card-info">
+            <h3 class="card-title">One-page checkout</h3>
+            <span class="label">2024</span>
+            <p class="card-desc">Five steps folded into one, lifting conversion by 12%.</p>
+            <div class="card-tags"><span class="tag">E-commerce</span><span class="tag">Web</span></div>
+          </div>
+        </a>
+
+        <a href="project.html" class="card card--wide card--offset" data-cursor="View" data-reveal style="--delay: 1">
+          <div class="card-media" data-tilt><span class="card-placeholder">04</span></div>
+          <div class="card-info">
+            <h3 class="card-title">Medication tracker</h3>
+            <span class="label">2023</span>
+            <p class="card-desc">A self-initiated study in accessible design for low-vision users.</p>
+            <div class="card-tags"><span class="tag">Health</span><span class="tag">Accessibility</span></div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- =========================== MARQUEE ===========================
+         script.js duplicates the items so the loop is seamless. -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track" data-marquee>
+        <span>Product design</span>
+        <span>UX research</span>
+        <span>Interaction</span>
+        <span>Design systems</span>
+        <span>Prototyping</span>
+        <span>Accessibility</span>
+      </div>
+    </div>
+
+    <!-- ============================= CTA ============================= -->
+    <section class="cta wrap" data-reveal>
+      <p class="label">Got something in mind?</p>
+      <a href="contact.html" class="cta-link" data-cursor="Hi!">Let's talk<span class="arrow">→</span></a>
+    </section>
+  </main>
+
+  <!-- ============================ FOOTER ============================ -->
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <span class="label">© <span data-year></span> Your Name</span>
+      <ul class="footer-links">
+        <li><a class="link" href="mailto:you@example.com" data-copy="you@example.com">you@example.com</a></li>
+        <li><a class="link" href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a class="link" href="https://dribbble.com/your-handle" target="_blank" rel="noopener">Dribbble</a></li>
+      </ul>
+      <a href="#" class="to-top" aria-label="Back to top">↑</a>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
