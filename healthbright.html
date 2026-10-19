@@ -201,6 +201,26 @@
           <figcaption>Colour palette developed for the brand.</figcaption>
         </figure>
       </div>
+      <div class="gallery">
+        <!-- Before / After comparison: move the pointer from right to left
+             (or drag on touch screens, or use the arrow keys) to wipe from
+             Before to After. The After image is pictures/HealthBrightAfterSeconds.png;
+             export it at the same size as the Before image. -->
+        <figure class="shot shot--full compare" data-compare data-cursor="Drag" data-reveal tabindex="0"
+                role="slider" aria-label="Before and after comparison" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="shot-media">
+            <img src="pictures/HealthBrightBeforeSeconds.png" alt="What it shows">
+            <div class="compare-after">
+              <img src="pictures/HealthBrightAfterSeconds.png" alt="Test results after the redesign" onerror="this.closest('.compare-after').classList.add('is-missing')">
+              <span class="compare-missing">Add pictures/HealthBrightAfterSeconds.png</span>
+            </div>
+            <span class="compare-label compare-label--before" aria-hidden="true">Before</span>
+            <span class="compare-label compare-label--after" aria-hidden="true">After</span>
+            <span class="compare-handle" aria-hidden="true"></span>
+          </div>
+          <figcaption>Lyssna test results from having interviewed 24 participants on what they think of the site.</figcaption>
+        </figure>
+      </div>
     </section>
 
     <!-- ========================= REFLECTION ========================== -->
