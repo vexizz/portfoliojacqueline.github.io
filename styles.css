@@ -1209,8 +1209,7 @@ html[data-cursor="off"] .cursor, html[data-cursor="off"] .px-trail { display: no
    12-column grid. Mix these sizes to build each row:
      shot--full (12) · shot--two-thirds (8) + shot--third (4)
      shot--half (6) + shot--half (6) · 3 × shot--third (4)
-   Defaults are paired so rows line up: two-thirds 16:10 sits next to a
-   4:5 third, halves are 4:3.
+   All sizes use a 16:10 frame; phone screenshots can opt into ratio-phone.
    -------------------------------------------------------------------- */
 .gallery {
   display: grid;
@@ -1218,10 +1217,78 @@ html[data-cursor="off"] .cursor, html[data-cursor="off"] .px-trail { display: no
   gap: var(--space-7) var(--space-5);
   margin-block: var(--space-7);
 }
-.shot--full       { grid-column: 1 / -1;  --ratio: 16 / 8; }
+.shot--full       { grid-column: 1 / -1;  --ratio: 16 / 10; }
 .shot--two-thirds { grid-column: span 8;  --ratio: 16 / 10; }
-.shot--third      { grid-column: span 4;  --ratio: 4 / 5; }
-.shot--half       { grid-column: span 6;  --ratio: 4 / 3; }
+.shot--third      { grid-column: span 4;  --ratio: 16 / 10; }
+.shot--half       { grid-column: span 6;  --ratio: 16 / 10; }
+/* Every picture is a 16:10 frame (matching the 1920x1200 exports).
+   A picture that's alone in its row always spans the full width. */
+.gallery > .shot:only-child { grid-column: 1 / -1; }
+/* For an image that isn't 16:10: show all of it (no cropping),
+   with the frame's background filling the gap. */
+.shot--fit .shot-media { background: var(--fit-bg, #0f1412); }
+.shot--fit .shot-media img { object-fit: contain; }
+
+/* ---------- Before / After comparison (Tapas audit) ---------------------
+   --split is where the divider sits, from the left (0-100%). Left of the
+   divider shows Before, right of it shows After. At rest it's 100% (all
+   Before); moving the pointer from right to left wipes After in.
+   script.js sets --split from the pointer / touch / arrow keys. */
+.compare { --split: 100%; cursor: ew-resize; touch-action: pan-y; }
+.compare .shot-media { user-select: none; }
+.compare-after {
+  position: absolute; inset: 0;
+  clip-path: inset(0 0 0 var(--split));
+  background: var(--surface);
+}
+.compare-after img { width: 100%; height: 100%; object-fit: cover; }
+.compare.is-settling .compare-after,
+.compare.is-settling .compare-handle { transition: clip-path 500ms var(--ease-out), left 500ms var(--ease-out); }
+.compare-handle {
+  position: absolute; top: 0; bottom: 0; left: var(--split);
+  width: 2px; margin-left: -1px;
+  background: #ffffff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08), 0 0 18px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+}
+.compare-handle::after {
+  content: "\2194";
+  position: absolute; top: 50%; left: 50%;
+  display: grid; place-items: center;
+  width: 40px; height: 40px; border-radius: 50%;
+  translate: -50% -50%;
+  background: #ffffff; color: #1a1a1a;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+/* "BEFORE" / "AFTER" pills, like the reference */
+.compare-label {
+  position: absolute; top: 14px; z-index: 2;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  background: rgba(30, 30, 30, 0.55); color: #ffffff;
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  font-family: var(--font-label); font-size: var(--text-xs); font-weight: 600;
+  text-transform: uppercase; letter-spacing: var(--tracking-label);
+  pointer-events: none;
+  transition: opacity var(--dur-fast);
+}
+.compare-label--before { left: 14px; }
+.compare-label--after  { right: 14px; }
+.compare:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: var(--radius-md); }
+/* Shown until pictures/TapasAuditAfter.png exists */
+.compare-missing { display: none; }
+.compare-after.is-missing img { display: none; }
+.compare-after.is-missing {
+  display: grid; place-items: center end; padding-right: 6%;
+  background: repeating-linear-gradient(-45deg, var(--surface) 0 14px, color-mix(in srgb, var(--fg) 8%, var(--bg)) 14px 28px);
+}
+.compare-after.is-missing .compare-missing {
+  display: block;
+  padding: 8px 16px; border-radius: var(--radius-pill);
+  background: var(--bg); color: var(--muted);
+  font-size: var(--text-sm);
+}
 
 
 /* ---------- "What I did" blocks ------------------------------------

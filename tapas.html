@@ -135,8 +135,22 @@
       </div>
 
       <div class="gallery">
-        <figure class="shot shot--full" data-lightbox data-cursor="Zoom" data-reveal>
-          <div class="shot-media"><img src="pictures/TapasAuditBefore.png" alt="What it shows"></div>
+        <!-- Before / After comparison: move the pointer from right to left
+             (or drag on touch screens, or use the arrow keys) to wipe from
+             Before to After. The After image is pictures/TapasAuditAfter.png;
+             export it at the same size as the Before image (1920x1200). -->
+        <figure class="shot shot--full compare" data-compare data-cursor="Drag" data-reveal tabindex="0"
+                role="slider" aria-label="Before and after comparison" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="shot-media">
+            <img src="pictures/TapasAuditBefore.png" alt="What it shows">
+            <div class="compare-after">
+              <img src="pictures/TapasAuditAfter.png" alt="The same pages after optimisation" onerror="this.closest('.compare-after').classList.add('is-missing')">
+              <span class="compare-missing">Add pictures/TapasAuditAfter.png (1920&times;1200)</span>
+            </div>
+            <span class="compare-label compare-label--before" aria-hidden="true">Before</span>
+            <span class="compare-label compare-label--after" aria-hidden="true">After</span>
+            <span class="compare-handle" aria-hidden="true"></span>
+          </div>
           <figcaption>Before and after: the browse page, decluttered.</figcaption>
         </figure>
       </div>

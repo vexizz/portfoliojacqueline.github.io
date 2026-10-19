@@ -17,6 +17,7 @@
      data-count      number counts up when scrolled into view
      data-carousel   drag/scroll strip with arrow buttons + progress
      data-lightbox   click an image to view it large
+     data-compare    before/after wipe that follows the pointer
      data-over       header stays transparent over the green hero
      data-glow       soft light follows the cursor
      data-dark       cursor turns light over this section
@@ -418,7 +419,7 @@
   {
     addEventListener('click', e => {
       if (calm()) return;
-      if (e.target.closest('a, button, input, textarea, label, [data-drag], [data-lightbox], [data-carousel], .lightbox, .settings')) return;
+      if (e.target.closest('a, button, input, textarea, label, [data-drag], [data-lightbox], [data-compare], [data-carousel], .lightbox, .settings')) return;
       const n = 10;
       for (let i = 0; i < n; i++) {
         const dot = document.createElement('span');
@@ -703,6 +704,42 @@
       if (e.key === 'ArrowRight') show(index + 1);
     });
   }
+
+
+  /* ---------- Before / After comparison ----------------------------- */
+  // The divider follows the pointer across the picture: moving from right
+  // to left wipes the After image in. Leaving the picture eases back to
+  // Before. Touch: drag. Keyboard: arrow keys (Home/End jump to ends).
+  $$('[data-compare]').forEach(el => {
+    const media = el.querySelector('.shot-media');
+    let split = 100;
+    const set = (pct, settle) => {
+      split = clamp(pct, 0, 100);
+      el.classList.toggle('is-settling', !!settle && !calm());
+      el.style.setProperty('--split', `${split}%`);
+      el.setAttribute('aria-valuenow', Math.round(100 - split)); // how much After shows
+    };
+    const fromPointer = e => {
+      const r = media.getBoundingClientRect();
+      set(((e.clientX - r.left) / r.width) * 100);
+    };
+    media.addEventListener('pointermove', e => {
+      if (e.pointerType === 'touch' && !e.buttons) return; // touch: only while dragging
+      fromPointer(e);
+    });
+    media.addEventListener('pointerdown', e => { if (e.pointerType === 'touch') fromPointer(e); });
+    media.addEventListener('pointerleave', e => { if (e.pointerType !== 'touch') set(100, true); });
+    el.addEventListener('keydown', e => {
+      const step = e.shiftKey ? 20 : 5;
+      if (e.key === 'ArrowLeft') set(split - step);
+      else if (e.key === 'ArrowRight') set(split + step);
+      else if (e.key === 'Home') set(0, true);
+      else if (e.key === 'End') set(100, true);
+      else return;
+      e.preventDefault();
+    });
+    el.addEventListener('transitionend', () => el.classList.remove('is-settling'));
+  });
 
 
   /* ---------- Copy to clipboard + toast ----------------------------- */
