@@ -329,6 +329,30 @@
   }
 
 
+  /* ---------- Scroll hint (home page) ------------------------------- */
+  // Fades out once you've scrolled a little; comes back at the very top.
+  const scrollHint = document.querySelector('[data-scroll-hint]');
+  if (scrollHint) {
+    const toggleHint = () => scrollHint.classList.toggle('is-gone', scrollY > 60);
+    addEventListener('scroll', toggleHint, { passive: true });
+    toggleHint();
+  }
+
+
+  /* ---------- Project stages (home page) ---------------------------- */
+  // A project is "in focus" while its panel crosses the middle band of the
+  // screen: its screenshot pops up and the tags fly out (styles.css 5f-b).
+  // Hover does the same on desktop. With Calm/Still motion, CSS keeps
+  // every project in focus, so there's nothing to animate.
+  const projects = $$('.project');
+  if (projects.length) {
+    const focusIO = new IntersectionObserver(entries => {
+      entries.forEach(entry => entry.target.closest('.project').classList.toggle('is-active', entry.isIntersecting));
+    }, { rootMargin: '-38% 0px -38% 0px' });
+    projects.forEach(p => focusIO.observe(p.querySelector('.project-stage')));
+  }
+
+
   /* ---------- Magnetic buttons -------------------------------------- */
   if (finePointer) {
     $$('[data-magnetic]').forEach(el => {
@@ -442,9 +466,13 @@
   if (wordmark) {
     // Size the wordmark to exactly fill the page width, whatever the text.
     const fit = () => {
+      // Measure the text itself (a Range), so short names grow and long ones shrink.
       wordmark.style.fontSize = '100px';
-      const ratio = wordmark.clientWidth / wordmark.scrollWidth;
-      wordmark.style.fontSize = `${Math.min(100 * ratio * 0.98, 320)}px`;
+      const range = document.createRange();
+      range.selectNodeContents(wordmark);
+      const textWidth = range.getBoundingClientRect().width;
+      if (!textWidth) return;
+      wordmark.style.fontSize = `${Math.min(100 * (wordmark.clientWidth / textWidth) * 0.98, 190)}px`; // capped so a short name stays modest
     };
     fit();
     addEventListener('resize', fit);

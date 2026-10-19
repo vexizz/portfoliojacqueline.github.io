@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>About · Your Name</title>
-  <meta name="description" content="About Your Name, product designer.">
-  <meta name="theme-color" content="#f3f2ee" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#161615" media="(prefers-color-scheme: dark)">
+  <title>About · Jiwan</title>
+  <meta name="description" content="About Jiwan, product designer.">
+  <meta name="theme-color" content="#efe6d8" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1e0c0c" media="(prefers-color-scheme: dark)">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Silkscreen&display=swap" rel="stylesheet">
@@ -43,10 +43,10 @@
        Same on every page; only aria-current (the green pill) moves. -->
   <header class="site-header">
     <div class="wrap">
-      <a href="index.html" class="logo" aria-label="Your Name, home" data-pt="hello">
-        <span class="logo-dot"></span>Your Name
+      <a href="index.html" class="logo" aria-label="Jiwan, home" data-pt="hello">
+        <span class="logo-dot"></span>Jiwan
       </a>
-      <span class="label header-time" data-clock data-tz="Europe/London">London</span>
+      <span class="label header-time" data-clock data-tz="Australia/Melbourne">Melbourne</span>
       <nav aria-label="Main">
         <ul class="nav">
           <li><a href="index.html" data-pt="work"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14V7M8 7C8 4.2 6.2 2.5 2.5 2.5 2.5 5.5 4.6 7 8 7ZM8 9.5c0-2.6 2-4.6 5.5-4.6 0 2.8-2 4.6-5.5 4.6Z"/></svg><span class="nav-label">work</span></a></li>
@@ -70,7 +70,7 @@
 
     <!-- ======================= PORTRAIT + BIO ========================
          Portrait: replace the placeholder span with
-           <img src="images/portrait.jpg" alt="Your Name smiling">
+           <img src="images/portrait.jpg" alt="Jiwan smiling">
          The first bio paragraph is styled larger as an intro. -->
     <section class="wrap">
       <div class="about-grid">
@@ -80,6 +80,7 @@
         </div>
 
         <div class="bio" data-reveal style="--delay: 1">
+          <div class="full-name"><span class="label">Full name</span> Jacqueline Iwanto</div>
           <p>
             I'm a product designer with 6 years of experience shaping apps and
             platforms that millions of people use without thinking twice.
@@ -134,19 +135,9 @@
          Social links live in the footer pills below. -->
     <section id="contact" class="contact-block wrap">
       <h2 class="visually-hidden">Contact</h2>
-      <div class="contact-grid">
-        <div class="col-wide" data-reveal>
-          <a href="mailto:you@example.com" class="email-big" data-copy="you@example.com" data-cursor="Copy">you@example.com</a>
-          <p class="label email-hint">Click to copy · I reply within 2 days</p>
-        </div>
-        <div class="col-narrow" data-reveal style="--delay: 1">
-          <ul class="facts">
-            <li><span class="muted">Looking for</span><span>Full-time product roles</span></li>
-            <li><span class="muted">Also open to</span><span>Freelance projects</span></li>
-            <li><span class="muted">Based in</span><span>London, UK</span></li>
-            <li><span class="muted">My time</span><span class="label" data-clock data-tz="Europe/London"></span></li>
-          </ul>
-        </div>
+      <div class="contact-center" data-reveal>
+        <a href="mailto:you@example.com" class="email-big" data-copy="you@example.com" data-cursor="Copy">you@example.com</a>
+        <p class="label email-hint">Click to copy · I reply within 2 days</p>
       </div>
     </section>
   </main>
@@ -162,12 +153,11 @@
           <li><a class="pill" href="mailto:you@example.com" data-copy="you@example.com"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.8" y="3.2" width="12.4" height="9.6" rx="1.2"/><path d="m2.3 4 5.7 4.6L13.7 4"/></svg>email</a></li>
           <li><a class="pill" href="resume.pdf"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 1.8h5.5L12.5 5v9.2H4Z"/><path d="M9.5 1.8V5h3M6.2 8h4.2M6.2 10.8h4.2"/></svg>résumé</a></li>
           <li><a class="pill pill--icon" href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.8" y="1.8" width="12.4" height="12.4" rx="2"/><path d="M5 7v4.5M5 4.6v.1M7.8 11.5V7m0 2c0-1.2.8-2 1.9-2s1.6.8 1.6 2v2.5"/></svg></a></li>
-          <li><a class="pill pill--icon" href="https://x.com/your-handle" target="_blank" rel="noopener" aria-label="X"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.6 2.6h3.2l7.6 10.8h-3.2ZM13 2.6 9 7.2M7 8.8l-4 4.6"/></svg></a></li>
         </ul>
         <a href="#" class="to-top" aria-label="Back to top">↑</a>
       </div>
-      <p class="wordmark" data-liquid aria-hidden="true">yourname</p>
-      <p class="footer-note">© <span data-year></span> Your Name. All rights reserved, a few left wild <span class="spark">✦</span> made by a human <span class="spark">✦</span> designed in London</p>
+      <p class="wordmark" data-liquid aria-hidden="true">jiwan</p>
+      <p class="footer-note">© <span data-year></span> Jiwan. All rights reserved, a few left wild <span class="spark">✦</span> designed in Melbourne</p>
     </div>
     <svg class="liquid-defs" width="0" height="0" aria-hidden="true" focusable="false">
       <filter id="liquid" x="-10%" y="-20%" width="120%" height="140%">

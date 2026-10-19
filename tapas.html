@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tapas · Jiwan</title>
+  <meta name="description" content="Case study: redesigning Tapas layouts to be cleaner and more energy efficient, so older devices can navigate content more easily.">
+  <meta name="theme-color" content="#efe6d8" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1e0c0c" media="(prefers-color-scheme: dark)">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Silkscreen&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    // Marks JS as on (for scroll reveals) and applies saved Settings
+    // (motion, text size, contrast, cursor) before the page paints. If we
+    // arrived through a page transition, cover the page in green so it can
+    // slide away on load.
+    (function () {
+      var html = document.documentElement, prefs = {};
+      html.classList.add('js');
+      try { prefs = JSON.parse(localStorage.getItem('site-prefs')) || {}; } catch (e) {}
+      if (prefs.theme && prefs.theme !== 'auto') html.setAttribute('data-theme', prefs.theme);
+      if (prefs.motion) html.setAttribute('data-motion', prefs.motion);
+      if (prefs.text && prefs.text !== 'default') html.setAttribute('data-text', prefs.text);
+      if (prefs.contrast) html.setAttribute('data-contrast', 'high');
+      if (prefs.cursor === false) html.setAttribute('data-cursor', 'off');
+      var full = prefs.motion ? prefs.motion === 'full' : !matchMedia('(prefers-reduced-motion: reduce)').matches;
+      try {
+        var pt = sessionStorage.getItem('pt');
+        sessionStorage.removeItem('pt');
+        if (pt !== null && full) {
+          html.classList.add('pt-enter');
+          html.setAttribute('data-pt', pt);
+        }
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+  <!--
+    PROJECT PAGE (same structure as someone-health.html)
+    Sections: hero → cover → intro + details → numbered blocks with
+    picture grids → results → reflection → carousel of other work.
+
+    Adding images: inside any .shot-media, replace the .shot-placeholder
+    span with <img src="images/your-file.jpg" alt="What it shows">.
+    Anything marked TBC is a detail to fill in.
+  -->
+
+  <!-- ============================ HEADER ============================
+       Same on every page; only aria-current (the green pill) moves. -->
+  <header class="site-header site-header--over" data-over>
+    <div class="wrap">
+      <a href="index.html" class="logo" aria-label="Jiwan, home" data-pt="hello">
+        <span class="logo-dot"></span>Jiwan
+      </a>
+      <span class="label header-time" data-clock data-tz="Australia/Melbourne">Melbourne</span>
+      <nav aria-label="Main">
+        <ul class="nav">
+          <li><a href="index.html" aria-current="page" data-pt="work"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14V7M8 7C8 4.2 6.2 2.5 2.5 2.5 2.5 5.5 4.6 7 8 7ZM8 9.5c0-2.6 2-4.6 5.5-4.6 0 2.8-2 4.6-5.5 4.6Z"/></svg><span class="nav-label">work</span></a></li>
+          <li><a href="play.html" data-pt="play"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M2.3 6.5c3.4 1.2 8 1.2 11.4 0M8 2c-2.2 2.6-2.2 9.4 0 12M8 2c2.2 2.6 2.2 9.4 0 12"/></svg><span class="nav-label">play</span></a></li>
+          <li><a href="about.html" data-pt="about"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="4.8" r="2.6"/><path d="M3 14c0-3 2.2-5.2 5-5.2s5 2.2 5 5.2"/></svg><span class="nav-label">about</span></a></li>
+          <li><button type="button" class="nav-settings" data-settings aria-haspopup="dialog" aria-expanded="false" aria-label="Settings"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4.5h7.5M13 4.5h1M2 11.5h1.5M7 11.5h7"/><circle class="knob-a" cx="11.2" cy="4.5" r="1.7"/><circle class="knob-b" cx="5.3" cy="11.5" r="1.7"/></svg><span class="nav-label">settings</span></button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============================= HERO ============================ -->
+    <section class="cs-hero" data-dark data-glow>
+      <div class="wrap">
+        <a href="index.html#work" class="back"><span class="arrow">←</span> All work</a>
+        <h1 class="cs-title"><span data-split>Tapas'</span> <em data-split>lighter layouts</em></h1>
+        <p class="cs-kicker"><span>Web Design</span><span>Coding</span><span>Product Design</span><span>Energy Efficiency</span></p>
+      </div>
+    </section>
+
+    <div class="wrap cs-cover-wrap" data-reveal>
+      <figure class="shot cs-cover" data-lightbox data-cursor="Zoom">
+        <div class="shot-media"><span class="shot-placeholder">Hero image: the redesigned Tapas layouts on mobile and desktop</span></div>
+      </figure>
+    </div>
+
+    <section class="wrap cs-intro">
+      <p class="cs-lead" data-reveal>Tapas is a platform for reading webcomics and novels. I redesigned key layouts to be cleaner and lighter, so stories stay easy to browse and read on older devices while using less energy.</p>
+      <dl class="cs-meta" data-reveal>
+        <div><dt class="label">Role</dt><dd>Web Designer &amp; Developer</dd></div>
+        <div><dt class="label">Team</dt><dd>CEO ∙ 2 Product Managers ∙ 10 Translators ∙ 2 Front-end Devs </dd></div>
+        <div><dt class="label">Timeline</dt><dd>15 Weeks</dd></div>
+        <div><dt class="label">Scope</dt><dd>Translating ∙ UX/UI ∙ User Testing ∙ Coding ∙ Research</dd></div>
+      </dl>
+    </section>
+
+    <!-- =========================== OVERVIEW ========================== -->
+    <section class="cs-section wrap">
+      <div class="cs-block">
+        <div class="cs-block-head" data-reveal><span class="label">01</span><h2>Overview <em>of the problem</em></h2></div>
+        <div class="cs-block-body" data-reveal style="--delay: 1">
+          <p>Image-heavy pages, old code, busy layouts and constant motion made browsing slow on older phones and tablets. They also used more data and battery than they needed to, which pushed away readers on older or lower-end devices.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================== CONTEXT =========================== -->
+    <section class="cs-section wrap">
+      <div class="cs-block">
+        <div class="cs-block-head" data-reveal><span class="label">02</span><h2>Context</h2></div>
+        <div class="cs-block-body" data-reveal style="--delay: 1">
+          <p>Tapas readers come back often and read for a long time, on all kinds of devices. The redesign focused on readers who:</p>
+          <ul class="did-list">
+            <li>use older or lower-powered phones and tablets</li>
+            <li>read on limited mobile data</li>
+            <li>binge long series in one sitting, often at night</li>
+            <li>need to find the next episode quickly and easily</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="gallery">
+        <figure class="shot shot--two-thirds" data-lightbox data-cursor="Zoom" data-reveal>
+          <div class="shot-media"><span class="shot-placeholder">Page weight audit</span></div>
+          <figcaption>Auditing what each page loads before a reader sees a single panel.</figcaption>
+        </figure>
+        <figure class="shot shot--third" data-lightbox data-cursor="Zoom" data-reveal style="--delay: 1">
+          <div class="shot-media"><span class="shot-placeholder">Original layout on an older phone</span></div>
+          <figcaption>The original layout on an older device.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============================ GOALS ============================ -->
+    <section class="cs-section wrap">
+      <div class="cs-block">
+        <div class="cs-block-head" data-reveal><span class="label">03</span><h2>Goals</h2></div>
+        <div class="cs-block-body" data-reveal style="--delay: 1">
+          <p>To make Tapas lighter, cleaner and easier to navigate, without losing the personality that makes it fun to browse.</p>
+          <ul class="did-list">
+            <li>Simplify layouts: Remove visual clutter so stories and covers take centre stage.</li>
+            <li>Lighten every page: Fewer heavy images, scripts, animations on first load through newer updated code.</li>
+            <li>Save energy: Introducing a dark-mode with energy-friendly colours and less constant motion.</li>
+            <li>Keep discovery easy: Make the next episode and new series simple to find.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="gallery">
+        <figure class="shot shot--full" data-lightbox data-cursor="Zoom" data-reveal>
+          <div class="shot-media"><span class="shot-placeholder">Before and after: browse page</span></div>
+          <figcaption>Before and after: the browse page, decluttered.</figcaption>
+        </figure>
+        <figure class="shot shot--third ratio-phone" data-lightbox data-cursor="Zoom" data-reveal>
+          <div class="shot-media"><span class="shot-placeholder">Phone screen: home</span></div>
+          <figcaption>Home</figcaption>
+        </figure>
+        <figure class="shot shot--third ratio-phone" data-lightbox data-cursor="Zoom" data-reveal style="--delay: 1">
+          <div class="shot-media"><span class="shot-placeholder">Phone screen: series page</span></div>
+          <figcaption>Series page</figcaption>
+        </figure>
+        <figure class="shot shot--third ratio-phone" data-lightbox data-cursor="Zoom" data-reveal style="--delay: 2">
+          <div class="shot-media"><span class="shot-placeholder">Phone screen: reader</span></div>
+          <figcaption>Reader</figcaption>
+        </figure>
+      </div>
+
+      <blockquote class="cs-quote" data-reveal>
+        I redesigned the core coding language, introducing a collapsible navigation system and a refined visual language. By balancing high-density data with a minimalist UI, the new model allowed devices to process sites with significantly less requirements.
+      </blockquote>
+    </section>
+
+    <!-- ===================== PROCESS + INSIGHTS ====================== -->
+    <section class="cs-section wrap">
+      <div class="cs-block">
+        <div class="cs-block-head" data-reveal><span class="label">04</span><h2>Process &amp; key insights</h2></div>
+        <div class="cs-block-body" data-reveal style="--delay: 1">
+          <p>I audited existing pages to find what slowed them down, applied sustainable web design principles to new layouts, then coded the key pages myself so I could check how they actually performed on older devices, not just how they looked in Figma.</p>
+          <ul class="did-list">
+            <li>Clean is fast: Removing decorative clutter improved both speed and readability.</li>
+            <li>Images are the heaviest part: Smarter image sizes and lazy loading made the biggest difference.</li>
+            <li>Coding the design reveals the truth: Building it showed problems that static mock-ups hid.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="gallery">
+        <figure class="shot shot--half" data-lightbox data-cursor="Zoom" data-reveal>
+          <div class="shot-media"><span class="shot-placeholder">Coded prototype</span></div>
+          <figcaption>The coded prototype running on an older device.</figcaption>
+        </figure>
+        <figure class="shot shot--half" data-lightbox data-cursor="Zoom" data-reveal style="--delay: 1">
+          <div class="shot-media"><span class="shot-placeholder">Energy-friendly colour palette</span></div>
+          <figcaption>An energy-friendly colour palette.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- =========================== RESULTS =========================== -->
+    <section class="cs-section wrap">
+      <div class="cs-block">
+        <div class="cs-block-head" data-reveal><span class="label">05</span><h2>Results <em>of what changed</em></h2></div>
+        <div class="cs-block-body" data-reveal style="--delay: 1">
+          <p>The redesigned layouts gave Tapas:</p>
+          <ul class="did-list">
+            <li>Cleaner pages where stories and covers stand out</li>
+            <li>Lighter pages that load smoothly on older devices</li>
+            <li>A calmer, more energy-friendly reading experience</li>
+        <div class="cs-block-body" data-reveal style="--delay: 1">
+          <div class="stats">
+            <div class="stat"><strong data-count="27" data-prefix="+" data-suffix="%">+27%</strong><span>Monthly viewers</span></div>
+            <div class="stat"><strong data-count="21" data-suffix="×">21×</strong><span>Energy Efficiency</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= REFLECTION ========================== -->
+    <section class="cs-section wrap">
+      <div class="cs-block">
+        <div class="cs-block-head" data-reveal><span class="label">06</span><h2>Reflection of <em>what I learned</em></h2></div>
+        <div class="cs-block-body" data-reveal style="--delay: 1">
+          <p>This project showed me that sustainable design and good UX usually point in the same direction: less clutter, lighter pages and clearer paths help both the planet and the reader. Coding my own designs also gave me a much better feel for the cost of every visual decision.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= MORE PROJECTS ========================= -->
+    <section class="more" data-carousel aria-label="More projects">
+      <div class="wrap carousel-head">
+        <h2 class="section-title">More <em>work</em></h2>
+        <div class="carousel-btns">
+          <button class="carousel-btn" data-carousel-prev aria-label="Previous projects">←</button>
+          <button class="carousel-btn" data-carousel-next aria-label="Next projects">→</button>
+        </div>
+      </div>
+      <div class="carousel-track" data-cursor="Drag" tabindex="0">
+        <a href="resident-evil-requiem.html" class="card" data-cursor="View">
+          <div class="card-media"><span class="card-placeholder">04</span></div>
+          <div class="card-info"><h3 class="card-title">Resident Evil Requiem</h3><span class="label">Content moderation</span><p class="card-desc">I co-designed an age-verification landing page that encourages and guides younger users through content restrictions.</p></div>
+        </a>
+        <a href="someone-health.html" class="card" data-cursor="View">
+          <div class="card-media"><span class="card-placeholder">01</span></div>
+          <div class="card-info"><h3 class="card-title">Someone.health</h3><span class="label">Web design</span><p class="card-desc">I designed the visuals for a mental health clinic's platform so users can manage their well-being without being overwhelmed.</p></div>
+        </a>
+        <a href="healthbright.html" class="card" data-cursor="View">
+          <div class="card-media"><span class="card-placeholder">02</span></div>
+          <div class="card-info"><h3 class="card-title">HealthBright</h3><span class="label">Product concept</span><p class="card-desc">I envisioned screens so users feel more comfortable and confident in managing their mental health.</p></div>
+        </a>
+        <a href="index.html#work" class="card card--all" data-cursor="All">
+          <div class="card-media"><span>All work →</span></div>
+          <div class="card-info"><h3 class="card-title">Back to everything</h3></div>
+        </a>
+      </div>
+      <div class="wrap"><div class="carousel-progress"><span></span></div></div>
+    </section>
+  </main>
+
+  <!-- ============================ FOOTER ============================
+       Footnote: contact pills, a giant soft wordmark that goes liquid
+       when you move across it, and the small print. Edit the links,
+       wordmark text and note below. -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <ul class="footer-pills">
+          <li><a class="pill" href="mailto:you@example.com" data-copy="you@example.com"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.8" y="3.2" width="12.4" height="9.6" rx="1.2"/><path d="m2.3 4 5.7 4.6L13.7 4"/></svg>email</a></li>
+          <li><a class="pill" href="resume.pdf"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 1.8h5.5L12.5 5v9.2H4Z"/><path d="M9.5 1.8V5h3M6.2 8h4.2M6.2 10.8h4.2"/></svg>résumé</a></li>
+          <li><a class="pill pill--icon" href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.8" y="1.8" width="12.4" height="12.4" rx="2"/><path d="M5 7v4.5M5 4.6v.1M7.8 11.5V7m0 2c0-1.2.8-2 1.9-2s1.6.8 1.6 2v2.5"/></svg></a></li>
+        </ul>
+        <a href="#" class="to-top" aria-label="Back to top">↑</a>
+      </div>
+      <p class="wordmark" data-liquid aria-hidden="true">jiwan</p>
+      <p class="footer-note">© <span data-year></span> Jiwan. All rights reserved, a few left wild <span class="spark">✦</span> designed in Melbourne</p>
+    </div>
+    <svg class="liquid-defs" width="0" height="0" aria-hidden="true" focusable="false">
+      <filter id="liquid" x="-10%" y="-20%" width="120%" height="140%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.008 0.016" numOctaves="2" seed="4" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </svg>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

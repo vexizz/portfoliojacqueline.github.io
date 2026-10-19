@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Someone.health · Jiwan</title>
+  <meta name="description" content="Case study: designing Someone.health's booking page so people can find and book mental health support without feeling overwhelmed.">
+  <meta name="theme-color" content="#efe6d8" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1e0c0c" media="(prefers-color-scheme: dark)">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Silkscreen&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    // Marks JS as on (for scroll reveals) and applies saved Settings
+    // (motion, text size, contrast, cursor) before the page paints. If we
+    // arrived through a page transition, cover the page in green so it can
+    // slide away on load.
+    (function () {
+      var html = document.documentElement, prefs = {};
+      html.classList.add('js');
+      try { prefs = JSON.parse(localStorage.getItem('site-prefs')) || {}; } catch (e) {}
+      if (prefs.theme && prefs.theme !== 'auto') html.setAttribute('data-theme', prefs.theme);
+      if (prefs.motion) html.setAttribute('data-motion', prefs.motion);
+      if (prefs.text && prefs.text !== 'default') html.setAttribute('data-text', prefs.text);
+      if (prefs.contrast) html.setAttribute('data-contrast', 'high');
+      if (prefs.cursor === false) html.setAttribute('data-cursor', 'off');
+      var full = prefs.motion ? prefs.motion === 'full' : !matchMedia('(prefers-reduced-motion: reduce)').matches;
+      try {
+        var pt = sessionStorage.getItem('pt');
+        sessionStorage.removeItem('pt');
+        if (pt !== null && full) {
+          html.classList.add('pt-enter');
+          html.setAttribute('data-pt', pt);
+        }
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+  <!--
+    PROJECT PAGE
+    Sections: hero → cover → numbered "what I did" blocks, each followed
+    by a picture grid → results → reflection → carousel of other work.
+
+    Adding images: inside any .shot-media, replace the .shot-placeholder
+    span with <img src="images/your-file.jpg" alt="What it shows">.
+    Picture grid sizes: shot--full, shot--two-thirds + shot--third,
+    shot--half + shot--half, or three shot--third. See styles.css §7.
+  -->
+
+  <!-- ============================ HEADER ============================
+       Same on every page; only aria-current (the green pill) moves. -->
+  <header class="site-header site-header--over" data-over>
+    <div class="wrap">
+      <a href="index.html" class="logo" aria-label="Jiwan, home" data-pt="hello">
+        <span class="logo-dot"></span>Jiwan
+      </a>
+      <span class="label header-time" data-clock data-tz="Australia/Melbourne">Melbourne</span>
+      <nav aria-label="Main">
+        <ul class="nav">
+          <li><a href="index.html" aria-current="page" data-pt="work"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14V7M8 7C8 4.2 6.2 2.5 2.5 2.5 2.5 5.5 4.6 7 8 7ZM8 9.5c0-2.6 2-4.6 5.5-4.6 0 2.8-2 4.6-5.5 4.6Z"/></svg><span class="nav-label">work</span></a></li>
+          <li><a href="play.html" data-pt="play"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M2.3 6.5c3.4 1.2 8 1.2 11.4 0M8 2c-2.2 2.6-2.2 9.4 0 12M8 2c2.2 2.6 2.2 9.4 0 12"/></svg><span class="nav-label">play</span></a></li>
+          <li><a href="about.html" data-pt="about"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="4.8" r="2.6"/><path d="M3 14c0-3 2.2-5.2 5-5.2s5 2.2 5 5.2"/></svg><span class="nav-label">about</span></a></li>
+          <li><button type="button" class="nav-settings" data-settings aria-haspopup="dialog" aria-expanded="false" aria-label="Settings"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4.5h7.5M13 4.5h1M2 11.5h1.5M7 11.5h7"/><circle class="knob-a" cx="11.2" cy="4.5" r="1.7"/><circle class="knob-b" cx="5.3" cy="11.5" r="1.7"/></svg><span class="nav-label">settings</span></button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============================= HERO ============================
+         Green gradient band. Title = upright word + italic word.
+         The kicker line lists type of work, domain, length and status. -->
+    <section class="cs-hero" data-dark data-glow>
+      <div class="wrap">
+        <a href="index.html#work" class="back"><span class="arrow">←</span> All work</a>
+        <h1 class="cs-title"><span data-split>Someone.health's</span> <em data-split>booking page</em></h1>
+        <p class="cs-kicker"><span>Web Design</span><span>Visual Design</span><span>Interaction Design</span><span>8 Weeks</span></p>
+      </div>
+    </section>
+
+    <div class="wrap cs-cover-wrap" data-reveal>
+      <figure class="shot cs-cover" data-lightbox data-cursor="Zoom">
+        <div class="shot-media"><span class="shot-placeholder">Hero image: the new onboarding flow on 3 phones</span></div>
+      </figure>
+    </div>
+
+    <section class="wrap cs-intro">
+      <p class="cs-lead" data-reveal>Someone.health’s booking page simplifies finding and scheduling online psychology consultations with professional mental health support.</p>
+      <dl class="cs-meta" data-reveal>
+        <div><dt class="label">Role</dt><dd>Web Designer</dd></div>
+        <div><dt class="label">Team</dt><dd>CEO ∙ 1 Product Manager ∙ 1 Front-end Dev</dd></div>
+        <div><dt class="label">Timeline</dt><dd>8 weeks ∙ 2025</dd></div>
+        <div><dt class="label">Scope</dt><dd>UX/UI ∙ UX Research ∙ Design System ∙ Software Developmment</dd></div>
+      </dl>
+    </section>
+
+    <!-- =========================== OVERVIEW ========================== -->
+    <section class="cs-section wrap">
+      <div class="cs-block">
+        <div class="cs-block-head" data-reveal><span class="label">01</span><h2>Overview <em>of the problem</em></h2></div>
+        <div class="cs-block-body" data-reveal style="--delay: 1">
+          <p>Users found booking mental health appointments overwhelming due to complicated navigation, and limited clarity, creating a need for a simple, accessible, and reassuring booking experience.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================== RESEARCH ========================== -->
+    <section class="cs-section wrap">
+      <div class="cs-block">
+        <div class="cs-block-head" data-reveal><span class="label">02</span><h2>Context</h2></div>
+        <div class="cs-block-body" data-reveal style="--delay: 1">
+          <p>Someone.health is an Australian online psychology service that connects individuals with registered psychologists through</p>
+          <ul class="did-list">
+            <li>video consultations</li>
+            <li>accessible mental health support</li>
+            <li> help with anxiety, stress, depression and other life challenges</li>
+            <li>available medicare bulk-billing options</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="gallery">
+        <figure class="shot shot--two-thirds" data-lightbox data-cursor="Zoom" data-reveal>
+          <div class="shot-media"><span class="shot-placeholder">Funnel analysis chart</span></div>
+          <figcaption>Drop-off spiked at the ID upload step.</figcaption>
+        </figure>
+        <figure class="shot shot--third" data-lightbox data-cursor="Zoom" data-reveal style="--delay: 1">
+          <div class="shot-media"><span class="shot-placeholder">Affinity map photo</span></div>
+          <figcaption>Clustering interview insights.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============================ DESIGN =========================== -->
+    <section class="cs-section wrap">
+      <div class="cs-block">
+        <div class="cs-block-head" data-reveal><span class="label">03</span><h2>Goals</h2></div>
+        <div class="cs-block-body" data-reveal style="--delay: 1">
+          <p>To create a seamless, accessible, and reassuring appointment booking experience that reduces barriers to mental health support while helping users confidently navigate the process.</p>
+          <ul class="did-list">
+            <li>Simplify navigation: Organise information into clear, intuitive steps.</li>
+            <li>Enhance accessibility: Apply inclusive design principles and readable layouts.</li>
+            <li>Build trust: Use a calm, reassuring visual hierarchy to reduce user anxiety.</li>
+            <li>Streamline booking: Minimise unnecessary steps when selecting psychologists and scheduling consultations.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="gallery">
+        <figure class="shot shot--full" data-lightbox data-cursor="Zoom" data-reveal>
+          <div class="shot-media"><span class="shot-placeholder">Wireframes: the three directions side by side</span></div>
+          <figcaption>Three directions we tested. We went with B.</figcaption>
+        </figure>
+        <figure class="shot shot--third ratio-phone" data-lightbox data-cursor="Zoom" data-reveal>
+          <div class="shot-media"><span class="shot-placeholder">Phone screen: welcome</span></div>
+          <figcaption>Welcome</figcaption>
+        </figure>
+        <figure class="shot shot--third ratio-phone" data-lightbox data-cursor="Zoom" data-reveal style="--delay: 1">
+          <div class="shot-media"><span class="shot-placeholder">Phone screen: why we verify</span></div>
+          <figcaption>Why we verify</figcaption>
+        </figure>
+        <figure class="shot shot--third ratio-phone" data-lightbox data-cursor="Zoom" data-reveal style="--delay: 2">
+          <div class="shot-media"><span class="shot-placeholder">Phone screen: smart camera</span></div>
+          <figcaption>Smart camera</figcaption>
+        </figure>
+      </div>
+
+      <blockquote class="cs-quote" data-reveal>
+        I redesigned Someone.health’s appointment booking page to create a more intuitive, accessible, and reassuring experience for users seeking mental health support. This is done by improving information hierarchy, simplifying navigation, and presenting appointment details clearly.
+      </blockquote>
+    </section>
+
+    <!-- ======================== TEST + SHIP ========================== -->
+    <section class="cs-section wrap">
+      <div class="cs-block">
+        <div class="cs-block-head" data-reveal><span class="label">04</span><h2>Process &amp; key insights</h2></div>
+        <div class="cs-block-body" data-reveal style="--delay: 1">
+          <p>I followed a user-centred design approach (interviews, 5-second tests, Google Forums) to evaluate and design Someone.health’s appointment booking page, focusing on simplifying the user journey, improving information hierarchy, and making the booking process more accessible and reassuring for individuals seeking mental health support while adhering to WCAG accessibility laws and guidelines.</p>
+                    <ul class="did-list">
+            <li>Clarity reduces cognitive load: Clear layouts and step-by-step navigation help users make decisions without feeling overwhelmed.</li>
+            <li>Accessibility builds inclusion: Readable typography, sufficient contrast, and intuitive interactions support users with diverse needs.</li>
+            <li>Trust encourages engagement: A calm, transparent interface helps users feel more comfortable navigating sensitive healthcare services.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="gallery">
+        <figure class="shot shot--half" data-lightbox data-cursor="Zoom" data-reveal>
+          <div class="shot-media"><span class="shot-placeholder">Usability test results</span></div>
+          <figcaption>Task success rose from 61% to 94%.</figcaption>
+        </figure>
+        <figure class="shot shot--half" data-lightbox data-cursor="Zoom" data-reveal style="--delay: 1">
+          <div class="shot-media"><span class="shot-placeholder">Final UI detail close-up</span></div>
+          <figcaption>Final design, with progress shown at every step.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- =========================== RESULTS =========================== -->
+    <section class="cs-section wrap">
+      <div class="cs-block">
+        <div class="cs-block-head" data-reveal><span class="label">05</span><h2>Results <em>of what changed</em></h2></div>
+        <div class="cs-block-body" data-reveal style="--delay: 1">
+          <p>Six months after launch:</p>
+          <div class="stats">
+            <div class="stat"><strong data-count="34" data-prefix="−" data-suffix="%">−34%</strong><span>Search drop-off</span></div>
+            <div class="stat"><strong data-count="2.1" data-suffix="×">2.1×</strong><span>Psychological consultations</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= REFLECTION ========================== -->
+    <section class="cs-section wrap">
+      <div class="cs-block">
+        <div class="cs-block-head" data-reveal><span class="label">06</span><h2>Reflection of <em>what I learned</em></h2></div>
+        <div class="cs-block-body" data-reveal style="--delay: 1">
+          <p>I learnt, through this experience, that designing a healthcare booking page requires more than usability; it also requires empathy. Users seeking mental health support may already feel overwhelmed, so clear instructions, reassuring language, and predictable interactions can help make the process feel less intimidating.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= MORE PROJECTS =========================
+         Carousel of the other projects. Drag, scroll or use the arrows. -->
+    <section class="more" data-carousel aria-label="More projects">
+      <div class="wrap carousel-head">
+        <h2 class="section-title">More <em>work</em></h2>
+        <div class="carousel-btns">
+          <button class="carousel-btn" data-carousel-prev aria-label="Previous projects">←</button>
+          <button class="carousel-btn" data-carousel-next aria-label="Next projects">→</button>
+        </div>
+      </div>
+      <div class="carousel-track" data-cursor="Drag" tabindex="0">
+        <a href="healthbright.html" class="card" data-cursor="View">
+          <div class="card-media"><span class="card-placeholder">02</span></div>
+          <div class="card-info"><h3 class="card-title">HealthBright</h3><span class="label">Product concept</span><p class="card-desc">I envisioned screens so users feel more comfortable and confident in managing their mental health.</p></div>
+        </a>
+        <a href="tapas.html" class="card" data-cursor="View">
+          <div class="card-media"><span class="card-placeholder">03</span></div>
+          <div class="card-info"><h3 class="card-title">Tapas</h3><span class="label">Web design</span><p class="card-desc">I redesigned layouts to be cleaner and energy efficient, helping older devices navigate content more easily.</p></div>
+        </a>
+        <a href="resident-evil-requiem.html" class="card" data-cursor="View">
+          <div class="card-media"><span class="card-placeholder">04</span></div>
+          <div class="card-info"><h3 class="card-title">Resident Evil Requiem</h3><span class="label">Content moderation</span><p class="card-desc">I co-designed an age-verification landing page that encourages and guides younger users through content restrictions.</p></div>
+        </a>
+        <a href="index.html#work" class="card card--all" data-cursor="All">
+          <div class="card-media"><span>All work →</span></div>
+          <div class="card-info"><h3 class="card-title">Back to everything</h3></div>
+        </a>
+      </div>
+      <div class="wrap"><div class="carousel-progress"><span></span></div></div>
+    </section>
+  </main>
+
+  <!-- ============================ FOOTER ============================
+       Footnote: contact pills, a giant soft wordmark that goes liquid
+       when you move across it, and the small print. Edit the links,
+       wordmark text and note below. -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <ul class="footer-pills">
+          <li><a class="pill" href="mailto:you@example.com" data-copy="you@example.com"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.8" y="3.2" width="12.4" height="9.6" rx="1.2"/><path d="m2.3 4 5.7 4.6L13.7 4"/></svg>email</a></li>
+          <li><a class="pill" href="resume.pdf"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 1.8h5.5L12.5 5v9.2H4Z"/><path d="M9.5 1.8V5h3M6.2 8h4.2M6.2 10.8h4.2"/></svg>résumé</a></li>
+          <li><a class="pill pill--icon" href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.8" y="1.8" width="12.4" height="12.4" rx="2"/><path d="M5 7v4.5M5 4.6v.1M7.8 11.5V7m0 2c0-1.2.8-2 1.9-2s1.6.8 1.6 2v2.5"/></svg></a></li>
+        </ul>
+        <a href="#" class="to-top" aria-label="Back to top">↑</a>
+      </div>
+      <p class="wordmark" data-liquid aria-hidden="true">jiwan</p>
+      <p class="footer-note">© <span data-year></span> Jiwan. All rights reserved, a few left wild <span class="spark">✦</span> designed in Melbourne</p>
+    </div>
+    <svg class="liquid-defs" width="0" height="0" aria-hidden="true" focusable="false">
+      <filter id="liquid" x="-10%" y="-20%" width="120%" height="140%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.008 0.016" numOctaves="2" seed="4" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </svg>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
