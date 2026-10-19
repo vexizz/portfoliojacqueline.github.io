@@ -1176,7 +1176,7 @@ html[data-cursor="off"] .cursor, html[data-cursor="off"] .px-trail { display: no
 .shot.ratio-phone  { --ratio: 9 / 16; }
 
 /* Big cover image under the hero */
-.cs-cover { --ratio: 21 / 10; }
+.cs-cover { --ratio: 16 / 10; }
 
 
 /* ---------- Picture grids ------------------------------------------
