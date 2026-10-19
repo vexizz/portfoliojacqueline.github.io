@@ -36,8 +36,8 @@
 :root {
   /* --- Raw palette ------------------------------------------------- */
   /* Never pure black/white: slightly warm neutrals feel softer. */
-  --ink:        #1e0c0c;   /* deep wine-brown: text in light mode, background in dark mode */
-  --paper:      #efe6d8;   /* cream: background in light mode, text in dark mode */
+  --ink:        #100505;   /* deep wine-brown: text in light mode, background in dark mode */
+  --paper:      #f5f2ec;   /* cream: background in light mode, text in dark mode */
   --green:      #45b26b;   /* the one accent colour: a bright leaf green */
   --green-deep: #1d6b3e;   /* darker green for small text on cream (meets contrast) */
 
