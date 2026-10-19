@@ -18,6 +18,8 @@
      data-carousel   drag/scroll strip with arrow buttons + progress
      data-lightbox   click an image to view it large
      data-compare    before/after wipe that follows the pointer
+     data-link       clicking a picture opens this URL instead of the preview
+     data-video      click-to-play video (with sound) on the Play page
      data-over       header stays transparent over the green hero
      data-glow       soft light follows the cursor
      data-dark       cursor turns light over this section
@@ -419,7 +421,7 @@
   {
     addEventListener('click', e => {
       if (calm()) return;
-      if (e.target.closest('a, button, input, textarea, label, [data-drag], [data-lightbox], [data-compare], [data-carousel], .lightbox, .settings')) return;
+      if (e.target.closest('a, button, input, textarea, label, [data-drag], [data-lightbox], [data-link], [data-video], [data-compare], [data-carousel], .lightbox, .settings')) return;
       const n = 10;
       for (let i = 0; i < n; i++) {
         const dot = document.createElement('span');
@@ -639,6 +641,60 @@
   });
 
 
+  /* ---------- Click-to-play videos (Play page) ---------------------- */
+  // The first click plays the video with sound and shows the browser's
+  // controls; after that the controls handle pause/seek/volume. Only one
+  // video plays at a time.
+  const videoItems = $$('[data-video]');
+  videoItems.forEach(item => {
+    const video = item.querySelector('video');
+    item.tabIndex = 0;
+    item.setAttribute('role', 'button');
+    item.setAttribute('aria-label', 'Play video: ' + (item.querySelector('figcaption span')?.textContent.trim() || 'video'));
+    const start = () => {
+      videoItems.forEach(other => { if (other !== item) other.querySelector('video').pause(); });
+      video.controls = true;
+      video.play();
+    };
+    item.addEventListener('click', e => {
+      if (video.controls) return; // once playing, the native controls take over
+      e.preventDefault();
+      start();
+    });
+    item.addEventListener('keydown', e => {
+      if ((e.key === 'Enter' || e.key === ' ') && e.target === item) {
+        e.preventDefault();
+        video.paused ? start() : video.pause();
+      }
+    });
+    video.addEventListener('play', () => { item.classList.add('is-playing'); item.dataset.cursor = 'Pause'; });
+    video.addEventListener('pause', () => { item.classList.remove('is-playing'); item.dataset.cursor = 'Play'; });
+  });
+
+
+  /* ---------- Linked pictures (Play page) --------------------------- */
+  // Give any picture a link with data-link="https://...". Clicking it (or
+  // Enter) then opens the link instead of the enlarged preview: web links
+  // in a new tab, your own pages (e.g. tapas.html) in the same tab.
+  // Leave data-link empty to keep the preview. Must run before the
+  // lightbox below collects its pictures.
+  $$('[data-link]').forEach(item => {
+    const url = item.dataset.link.trim();
+    if (!url) return;
+    const external = /^https?:\/\//i.test(url);
+    item.removeAttribute('data-lightbox');
+    item.classList.add('has-link');
+    item.dataset.cursor = 'Open';
+    item.setAttribute('role', 'link');
+    item.tabIndex = 0;
+    const title = item.querySelector('figcaption span');
+    item.setAttribute('aria-label', `${title ? title.textContent.trim() : 'Open project'}${external ? ' (opens in a new tab)' : ''}`);
+    const open = () => external ? window.open(url, '_blank', 'noopener') : (location.href = url);
+    item.addEventListener('click', open);
+    item.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); open(); } });
+  });
+
+
   /* ---------- Lightbox ---------------------------------------------- */
   // Click any [data-lightbox] shot to view it large. Arrow keys / buttons
   // move through every shot on the page; Esc or a click outside closes.
@@ -667,7 +723,13 @@
       index = (i + list.length) % list.length;
       const shot = list[index];
       const media = shot.querySelector('.shot-media').cloneNode(true);
-      media.style.setProperty('--ratio', getComputedStyle(shot).getPropertyValue('--ratio'));
+      // Use the picture's own shape so it's never cropped or zoomed; fall
+      // back to the frame's shape for placeholders without an image.
+      const pic = shot.querySelector('.shot-media img');
+      const ratio = pic && pic.naturalWidth
+        ? `${pic.naturalWidth} / ${pic.naturalHeight}`
+        : getComputedStyle(shot.querySelector('.shot-media')).getPropertyValue('--ratio');
+      media.style.setProperty('--ratio', ratio);
       slot.replaceChildren(media);
       const cap = shot.querySelector('figcaption');
       text.textContent = cap ? cap.textContent.trim() : '';

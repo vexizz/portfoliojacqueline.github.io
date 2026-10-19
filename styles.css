@@ -1436,7 +1436,9 @@ html[data-cursor="off"] .cursor, html[data-cursor="off"] .px-trail { display: no
   transition: scale var(--dur-med) var(--ease-spring);
 }
 .lightbox.is-open .lightbox-stage { scale: 1; }
-.lightbox .shot-media { width: min(1100px, 86vw, calc(74vh * var(--ratio, 1.6))); }
+.lightbox .shot-media { width: min(1100px, 86vw, calc(74vh * var(--ratio, 1.6))); aspect-ratio: var(--ratio, 16 / 10); }
+/* Enlarged pictures always show whole, at their own shape. */
+.lightbox .shot-media img { object-fit: contain; transform: none; }
 .lightbox-caption {
   display: flex; justify-content: space-between; gap: var(--space-4);
   margin-top: var(--space-4); font-size: var(--text-sm); color: var(--muted);
@@ -1615,6 +1617,45 @@ html[data-cursor="off"] .cursor, html[data-cursor="off"] .px-trail { display: no
 .play-item figcaption { justify-content: space-between; align-items: baseline; }
 .play-item figcaption span:first-child { font-family: var(--font-serif); font-size: 1.25rem; color: var(--fg); }
 .play-item.is-hidden { display: none; }
+/* Play pictures keep their own original shape: no fixed frame, no
+   cropping or zooming. (Only an empty placeholder uses --ratio.) */
+.play-item .shot-media { aspect-ratio: auto; }
+.play-item .shot-media:has(.shot-placeholder) { aspect-ratio: var(--ratio, 4 / 3); }
+.play-item .shot-media > img,
+.play-item .shot-media > video { width: 100%; height: auto; object-fit: initial; }
+.play-item:hover .shot-media > img { transform: none; } /* no zoom on hover */
+
+/* Video items: a round play button over the cover image. Once playing,
+   the button hides and the browser's own controls take over. */
+.play-video { cursor: pointer; }
+.play-video video { display: block; background: #000; }
+.play-video-btn {
+  position: absolute; top: 50%; left: 50%; z-index: 2;
+  display: grid; place-items: center;
+  width: 72px; height: 72px; border-radius: 50%;
+  translate: -50% -50%;
+  background: var(--accent); color: var(--on-accent);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+  transition: scale var(--dur-med) var(--ease-spring), opacity var(--dur-fast);
+}
+.play-video-btn svg { width: 26px; height: 26px; margin-left: 4px; fill: currentColor; }
+.play-video:hover .play-video-btn { scale: 1.1; }
+.play-video.is-playing .play-video-btn { opacity: 0; scale: 0.6; }
+/* Items with a data-link: pointer cursor and a ↗ badge that pops in on hover */
+.play-item.has-link { cursor: pointer; }
+.play-item.has-link .shot-media::after {
+  content: "\2197";
+  position: absolute; top: 12px; right: 12px;
+  display: grid; place-items: center;
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--accent); color: var(--on-accent);
+  font-size: 1.1rem; font-weight: 600;
+  scale: 0;
+  transition: scale var(--dur-med) var(--ease-spring);
+}
+.play-item.has-link:hover .shot-media::after,
+.play-item.has-link:focus-visible .shot-media::after { scale: 1; }
 .play-item.is-shown { animation: pop-in 520ms var(--ease-spring) both; animation-delay: calc(var(--d, 0) * 45ms); }
 @keyframes pop-in { from { opacity: 0; transform: scale(0.9) rotate(var(--tilt)); } }
 

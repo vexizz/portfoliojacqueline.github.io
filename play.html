@@ -66,71 +66,69 @@
         <span data-split>Things I've created</span>
         <em class="voice" data-split>on the side :)</em>
       </h1>
-      <p class="play-lead">Illustrations, motion experiments, 3DCG, photos and everything mixed! Includes both professional and non-professional work.</p>
+      <p class="play-lead">Graphics, motion experiments, 3DCG, photos and everything mixed! Includes both professional and non-professional work.</p>
     </section>
 
     <!-- ============================= GRID ============================
-         A masonry grid: items flow into columns and keep their own shape.
-         Each item: set the shape with --ratio, the filter category with
-         data-tags, and replace the placeholder span with an <img>.
-         Clicking an item opens it large; nothing links away. -->
+         A masonry grid: items flow into columns and every picture shows at
+         its own original shape (nothing is cropped). Set the filter category
+         with data-tags; --ratio only sizes an empty placeholder.
+         Clicking: put a URL in data-link="" to make the item open it
+         (web links open in a new tab, e.g. data-link="https://www.behance.net/...").
+         Leave data-link="" empty to open the picture large instead. -->
     <section class="wrap play">
       <div class="play-filters" role="group" aria-label="Filter" data-filter-group>
         <button class="chip" data-filter="all" aria-pressed="true">everything</button>
-        <button class="chip" data-filter="illustration" aria-pressed="false">illustration</button>
+        <button class="chip" data-filter="graphics" aria-pressed="false">graphics</button>
         <button class="chip" data-filter="motion" aria-pressed="false">motion</button>
         <button class="chip" data-filter="3d" aria-pressed="false">3D</button>
-        <button class="chip" data-filter="photo" aria-pressed="false">photo</button>
       </div>
 
       <div class="play-grid">
-        <figure class="shot play-item" data-lightbox data-cursor="Zoom" data-tags="illustration" data-reveal>
-          <div class="shot-media" style="--ratio: 4 / 5"><span class="shot-placeholder">Poster series: city birds</span></div>
-          <figcaption><span>City birds poster</span><span class="label">Illustration</span></figcaption>
+        <!-- Video item: click to play (with sound), click again or use the
+             controls to pause. The cover shown before playing is the poster. -->
+        <figure class="shot play-item" data-link="" data-lightbox data-cursor="Zoom" data-tags="motion" data-reveal>
+          <div class="shot-media" style="--ratio: 16 / 9"><img src="pictures/MV.gif" alt="What it shows"></div>
+          <figcaption><span>𩃬傷 MV Recreation</span></figcaption>
         </figure>
-        <figure class="shot play-item" data-lightbox data-cursor="Zoom" data-tags="motion" data-reveal>
-          <div class="shot-media" style="--ratio: 1 / 1"><span class="shot-placeholder">Loop: bouncing type</span></div>
-          <figcaption><span>Bouncy type loop</span><span class="label">Motion</span></figcaption>
+        <figure class="shot play-item" data-link="" data-lightbox data-cursor="Zoom" data-tags="3d" data-reveal>
+          <div class="shot-media" style="--ratio: 3 / 4"><img src="pictures/App.png" alt="What it shows"></div>
+          <figcaption><span>Installation App Design</span></figcaption>
         </figure>
-        <figure class="shot play-item" data-lightbox data-cursor="Zoom" data-tags="photo" data-reveal>
-          <div class="shot-media" style="--ratio: 3 / 4"><span class="shot-placeholder">Photo: morning market</span></div>
-          <figcaption><span>Morning market, Lisbon</span><span class="label">Photo</span></figcaption>
+        <figure class="shot play-item" data-link="" data-lightbox data-cursor="Zoom" data-tags="motion" data-reveal>
+          <div class="shot-media" style="--ratio: 1 / 1"><img src="pictures/Pixels.gif" alt="What it shows"></div>
+          <figcaption><span>Pixelated Seasons Animation</span></figcaption>
         </figure>
-        <figure class="shot play-item" data-lightbox data-cursor="Zoom" data-tags="3d" data-reveal>
-          <div class="shot-media" style="--ratio: 4 / 3"><span class="shot-placeholder">3D: squishy buttons</span></div>
-          <figcaption><span>Squishy buttons</span><span class="label">3D</span></figcaption>
+        <figure class="shot play-item" data-link="" data-lightbox data-cursor="Zoom" data-tags="graphics" data-reveal>
+          <div class="shot-media" style="--ratio: 3 / 4"><img src="pictures/Commissions.png" alt="What it shows"></div>
+          <figcaption><span>Huion Kanvas 22 CSP Commission</span></figcaption>
         </figure>
-        <figure class="shot play-item" data-lightbox data-cursor="Zoom" data-tags="illustration" data-reveal>
-          <div class="shot-media" style="--ratio: 1 / 1"><span class="shot-placeholder">Sticker sheet</span></div>
-          <figcaption><span>Sticker sheet</span><span class="label">Illustration</span></figcaption>
+        <figure class="shot play-item play-video" data-video data-cursor="Play" data-tags="graphics" data-reveal>
+          <div class="shot-media">
+            <video src="pictures/Grunge.mp4" poster="pictures/Thumbnail.png" preload="metadata" playsinline aria-label="Immersive Grunge Video with sound design"></video>
+            <span class="play-video-btn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>
+          </div>
+          <figcaption><span>Immersive Grunge Video + Sound Design</span></figcaption>
         </figure>
-        <figure class="shot play-item" data-lightbox data-cursor="Zoom" data-tags="motion" data-reveal>
-          <div class="shot-media" style="--ratio: 9 / 16"><span class="shot-placeholder">App micro-interaction</span></div>
-          <figcaption><span>Pull-to-refresh idea</span><span class="label">Motion</span></figcaption>
+        <figure class="shot play-item" data-link="" data-lightbox data-cursor="Zoom" data-tags="3d" data-reveal>
+          <div class="shot-media" style="--ratio: 4 / 3"><img src="pictures/Lighting.png" alt="What it shows"></div>
+          <figcaption><span>Resident Evil Lighting Practice</span></figcaption>
         </figure>
-        <figure class="shot play-item" data-lightbox data-cursor="Zoom" data-tags="photo" data-reveal>
-          <div class="shot-media" style="--ratio: 4 / 3"><span class="shot-placeholder">Photo: shadows on a wall</span></div>
-          <figcaption><span>Afternoon shadows</span><span class="label">Photo</span></figcaption>
+        <figure class="shot play-item" data-link="" data-lightbox data-cursor="Zoom" data-tags="graphics" data-reveal>
+          <div class="shot-media" style="--ratio: 1 / 1"><img src="pictures/Murase.png" alt="What it shows"></div>
+          <figcaption><span>むせるくらいの愛をあげる Official Cover </span></figcaption>
         </figure>
-        <figure class="shot play-item" data-lightbox data-cursor="Zoom" data-tags="3d" data-reveal>
-          <div class="shot-media" style="--ratio: 4 / 5"><span class="shot-placeholder">3D: tiny desk scene</span></div>
-          <figcaption><span>Tiny desk</span><span class="label">3D</span></figcaption>
+        <figure class="shot play-item" data-link="" data-lightbox data-cursor="Zoom" data-tags="motion" data-reveal>
+          <div class="shot-media" style="--ratio: 9 / 16"><img src="pictures/Unmei.png" alt="What it shows"></div>
+          <figcaption><span>運命の人に出会う話 Official Cover</span></figcaption>
         </figure>
-        <figure class="shot play-item" data-lightbox data-cursor="Zoom" data-tags="illustration" data-reveal>
-          <div class="shot-media" style="--ratio: 3 / 4"><span class="shot-placeholder">Zine cover</span></div>
-          <figcaption><span>Zine: "Small joys"</span><span class="label">Illustration</span></figcaption>
+        <figure class="shot play-item" data-link="" data-lightbox data-cursor="Zoom" data-tags="3d" data-reveal>
+          <div class="shot-media" style="--ratio: 4 / 5"><img src="pictures/Fantasie.png" alt="What it shows"></div>
+          <figcaption><span>The Fantasie of a Stepmother Title Design</span></figcaption>
         </figure>
-        <figure class="shot play-item" data-lightbox data-cursor="Zoom" data-tags="motion" data-reveal>
-          <div class="shot-media" style="--ratio: 16 / 9"><span class="shot-placeholder">Logo animation</span></div>
-          <figcaption><span>Logo sting for a friend's band</span><span class="label">Motion</span></figcaption>
-        </figure>
-        <figure class="shot play-item" data-lightbox data-cursor="Zoom" data-tags="photo" data-reveal>
-          <div class="shot-media" style="--ratio: 1 / 1"><span class="shot-placeholder">Photo: green door</span></div>
-          <figcaption><span>Green door collection</span><span class="label">Photo</span></figcaption>
-        </figure>
-        <figure class="shot play-item" data-lightbox data-cursor="Zoom" data-tags="3d" data-reveal>
-          <div class="shot-media" style="--ratio: 3 / 4"><span class="shot-placeholder">3D: chrome type</span></div>
-          <figcaption><span>Chrome letters</span><span class="label">3D</span></figcaption>
+        <figure class="shot play-item" data-link="" data-lightbox data-cursor="Zoom" data-tags="graphics" data-reveal>
+          <div class="shot-media" style="--ratio: 3 / 4"><img src="pictures/Roxana.png" alt="What it shows"></div>
+          <figcaption><span>Roxana Title Design</span></figcaption>
         </figure>
       </div>
     </section>
@@ -145,8 +143,8 @@
       <div class="footer-top">
         <ul class="footer-pills">
           <li><a class="pill" href="mailto:you@example.com" data-copy="you@example.com"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.8" y="3.2" width="12.4" height="9.6" rx="1.2"/><path d="m2.3 4 5.7 4.6L13.7 4"/></svg>email</a></li>
-          <li><a class="pill" href="resume.pdf"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 1.8h5.5L12.5 5v9.2H4Z"/><path d="M9.5 1.8V5h3M6.2 8h4.2M6.2 10.8h4.2"/></svg>résumé</a></li>
-          <li><a class="pill pill--icon" href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.8" y="1.8" width="12.4" height="12.4" rx="2"/><path d="M5 7v4.5M5 4.6v.1M7.8 11.5V7m0 2c0-1.2.8-2 1.9-2s1.6.8 1.6 2v2.5"/></svg></a></li>
+          <li><a class="pill" href="https://drive.google.com/file/d/1qr-jmRHgt_7LpJ1WC5ZYzhcqTOSqBbp3/view?usp=sharing" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 1.8h5.5L12.5 5v9.2H4Z"/><path d="M9.5 1.8V5h3M6.2 8h4.2M6.2 10.8h4.2"/></svg>résumé</a></li>
+          <li><a class="pill pill--icon" href="https://www.linkedin.com/in/jacqueline-iwanto-011028278/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.8" y="1.8" width="12.4" height="12.4" rx="2"/><path d="M5 7v4.5M5 4.6v.1M7.8 11.5V7m0 2c0-1.2.8-2 1.9-2s1.6.8 1.6 2v2.5"/></svg></a></li>
         </ul>
         <a href="#" class="to-top" aria-label="Back to top">↑</a>
       </div>
