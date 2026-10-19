@@ -109,14 +109,27 @@
 }
 
 /* Dark mode: swap the neutrals, brighten the green so it still pops. */
+/* Theme: follows the device unless Settings forces one
+   (<html data-theme="light|dark">). The dark values appear twice: once
+   for "auto + device is dark", once for "forced dark". */
+:root { color-scheme: light; }
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
     --bg:          var(--ink);
     --fg:          var(--paper);
     --accent:      #3fd17f;
     --accent-text: #3fd17f;
     --on-accent:   var(--ink);
   }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg:          var(--ink);
+  --fg:          var(--paper);
+  --accent:      #3fd17f;
+  --accent-text: #3fd17f;
+  --on-accent:   var(--ink);
 }
 
 
@@ -660,12 +673,18 @@ a:hover .arrow, button:hover .arrow { transform: translateX(4px); }
 .to-top:hover { transform: rotate(-360deg) scale(1.1); background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
 
 @media (prefers-color-scheme: dark) {
-  .wordmark {
+  html:not([data-theme="light"]) .wordmark {
     text-shadow:
       0 -2px 2px rgba(255, 255, 255, 0.06),
       0 3px 3px rgba(0, 0, 0, 0.5),
       0 18px 30px rgba(0, 0, 0, 0.45);
   }
+}
+html[data-theme="dark"] .wordmark {
+  text-shadow:
+    0 -2px 2px rgba(255, 255, 255, 0.06),
+    0 3px 3px rgba(0, 0, 0, 0.5),
+    0 18px 30px rgba(0, 0, 0, 0.45);
 }
 
 
@@ -868,7 +887,7 @@ html[data-cursor="off"] .cursor, html[data-cursor="off"] .px-trail { display: no
 .cs-cover-wrap .shot-media { box-shadow: 0 30px 80px -20px rgba(8, 30, 16, 0.45); }
 
 /* Intro under the cover: lead paragraph + role/team/timeline strip */
-.cs-intro { padding-top: var(--space-8); }
+.cs-intro { padding-block: var(--space-8) var(--space-8); } /* room before the next section's line */
 .cs-lead {
   max-width: 30ch;
   font-family: var(--font-serif);
@@ -1402,7 +1421,7 @@ html.pt-enter::after {
 .seg input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
 .seg input:active + span { transform: scale(0.95); }
 .seg-hint { margin-top: var(--space-2); min-height: 1.5em; font-size: var(--text-sm); color: var(--muted); }
-.seg--text { margin-top: var(--space-7); }
+.seg--text, .seg--spaced { margin-top: var(--space-7); }
 
 /* On/off switches */
 .switches { margin-top: var(--space-6); border-top: 1px solid var(--line); }
@@ -1460,7 +1479,13 @@ html[data-contrast="high"] {
   --accent-text: color-mix(in srgb, var(--green-deep) 80%, #000);
 }
 @media (prefers-color-scheme: dark) {
-  html[data-contrast="high"] { --accent-text: #6ff0a6; }
+  html:not([data-theme="light"])[data-contrast="high"] { --accent-text: #6ff0a6; }
+}
+html[data-theme="dark"][data-contrast="high"] { --accent-text: #6ff0a6; }
+
+/* Switching theme in Settings: colours cross-fade instead of snapping. */
+html.theme-switching *, html.theme-switching *::before, html.theme-switching *::after {
+  transition: background-color 400ms var(--ease-out), color 400ms var(--ease-out), border-color 400ms var(--ease-out) !important;
 }
 html[data-contrast="high"] :focus-visible { outline-width: 3px; }
 html[data-contrast="high"] .shot-placeholder,

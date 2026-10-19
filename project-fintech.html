@@ -20,6 +20,7 @@
       var html = document.documentElement, prefs = {};
       html.classList.add('js');
       try { prefs = JSON.parse(localStorage.getItem('site-prefs')) || {}; } catch (e) {}
+      if (prefs.theme && prefs.theme !== 'auto') html.setAttribute('data-theme', prefs.theme);
       if (prefs.motion) html.setAttribute('data-motion', prefs.motion);
       if (prefs.text && prefs.text !== 'default') html.setAttribute('data-text', prefs.text);
       if (prefs.contrast) html.setAttribute('data-contrast', 'high');

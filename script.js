@@ -705,6 +705,7 @@
   // browser (localStorage) and applied as attributes on <html>, which
   // styles.css reacts to. The inline script in each page's <head> applies
   // them before the page paints, so there's no flash.
+  //   data-theme    light | dark             (absent = follow the system)
   //   data-motion   full | calm | still      (absent = follow the system)
   //   data-text     large | larger           (absent = default size)
   //   data-contrast high
@@ -718,6 +719,7 @@
   const applyPrefs = () => {
     const html = document.documentElement;
     const set = (attr, value) => value ? html.setAttribute(attr, value) : html.removeAttribute(attr);
+    set('data-theme', prefs.theme && prefs.theme !== 'auto' ? prefs.theme : '');
     set('data-motion', prefs.motion);
     set('data-text', prefs.text && prefs.text !== 'default' ? prefs.text : '');
     set('data-contrast', prefs.contrast ? 'high' : '');
@@ -782,7 +784,15 @@
       </header>
       <p class="settings-intro">Make this site comfortable for you. Your choices are saved on this device.</p>
 
-      <fieldset class="seg" data-pref="motion">
+      <fieldset class="seg" data-pref="theme">
+        <legend class="label">Theme</legend>
+        <label><input type="radio" name="theme" value="auto"><span>Auto</span></label>
+        <label><input type="radio" name="theme" value="light"><span>☀ Light</span></label>
+        <label><input type="radio" name="theme" value="dark"><span>☾ Dark</span></label>
+      </fieldset>
+      <p class="seg-hint">Auto matches your device.</p>
+
+      <fieldset class="seg seg--spaced" data-pref="motion">
         <legend class="label">Motion</legend>
         <label><input type="radio" name="motion" value="full"><span>Full</span></label>
         <label><input type="radio" name="motion" value="calm"><span>Calm</span></label>
@@ -837,6 +847,7 @@
 
   // Reflect the current prefs in the controls
   const syncControls = () => {
+    panel.querySelector(`[name="theme"][value="${prefs.theme || 'auto'}"]`).checked = true;
     const motion = prefs.motion || motionLevel();
     panel.querySelector(`[name="motion"][value="${motion}"]`).checked = true;
     panel.querySelector(`[name="text"][value="${prefs.text || 'default'}"]`).checked = true;
@@ -851,6 +862,11 @@
     const { name, value, checked, type } = e.target;
     prefs[name] = type === 'checkbox' ? checked : value;
     savePrefs(prefs);
+    if (name === 'theme' && !calm()) {
+      // Cross-fade the colours for a moment (styles.css: .theme-switching)
+      document.documentElement.classList.add('theme-switching');
+      setTimeout(() => document.documentElement.classList.remove('theme-switching'), 450);
+    }
     applyPrefs();
     syncControls();
     if (name === 'narration' && checked) speak(panel.querySelector('[name="narration"]').closest('.switch'));
