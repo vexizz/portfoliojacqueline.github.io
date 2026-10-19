@@ -142,7 +142,7 @@
            - .project-stage: a soft tinted panel. The desktop screenshot
              sits low behind frosted glass, and rises out of the panel
              (with the tags flying out) on hover or when scrolled to the
-             middle of the screen. Change the tint with --tint.
+             middle of the screen. Each panel's colours come from its stage--* class in styles.css.
            - .project-screen: a browser-window frame. Replace the
              .shot-placeholder span with
                <img src="images/your-cover.jpg" alt="What it shows">
@@ -159,7 +159,7 @@
 
       <div class="work-list">
         <a href="someone-health.html" class="project" data-cursor="view case study" data-pt="Someone.health" data-reveal>
-          <div class="project-stage" style="--tint: var(--tint-1)">
+          <div class="project-stage stage--someone">
             <div class="project-tags" aria-hidden="true">
               <span class="project-tag">Someone.health</span>
               <span class="project-tag">Web Design</span>
@@ -177,7 +177,7 @@
         </a>
 
         <a href="healthbright.html" class="project" data-cursor="view case study" data-pt="HealthBright" data-reveal>
-          <div class="project-stage" style="--tint: var(--tint-2)">
+          <div class="project-stage stage--healthbright">
             <div class="project-tags" aria-hidden="true">
               <span class="project-tag">HealthBright</span>
               <span class="project-tag">Mobile & Desktop</span>
@@ -195,7 +195,7 @@
         </a>
 
         <a href="tapas.html" class="project" data-cursor="view case study" data-pt="Tapas" data-reveal>
-          <div class="project-stage" style="--tint: var(--tint-3)">
+          <div class="project-stage stage--tapas">
             <div class="project-tags" aria-hidden="true">
               <span class="project-tag">Tapas</span>
               <span class="project-tag">Mobile & Desktop</span>
@@ -213,7 +213,7 @@
         </a>
 
         <a href="resident-evil-requiem.html" class="project" data-cursor="view case study" data-pt="Resident Evil Requiem" data-reveal>
-          <div class="project-stage" style="--tint: var(--tint-4)">
+          <div class="project-stage stage--resident">
             <div class="project-tags" aria-hidden="true">
               <span class="project-tag">Resident Evil Requiem</span>
               <span class="project-tag">Mobile & App</span>

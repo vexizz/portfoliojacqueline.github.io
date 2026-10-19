@@ -648,7 +648,7 @@ html[data-motion="calm"] .scroll-hint .wheel { animation: none; }
   container-type: inline-size; /* lets tag positions use cqw (1% of the panel width) */
   aspect-ratio: 16 / 7.5;
   border-radius: var(--radius-lg);
-  background: var(--tint);
+  background: var(--stage, var(--tint));
   isolation: isolate;
   /* Clip only the bottom edge, so the glass can slide away downwards
      while the screenshot and tags are free to rise above the panel. */
@@ -670,11 +670,37 @@ html[data-motion="calm"] .scroll-hint .wheel { animation: none; }
 .project-bar {
   display: flex; align-items: center; gap: 5px;
   height: 22px; padding: 0 10px;
-  background: color-mix(in srgb, var(--fg) 5%, var(--bg));
-  border-bottom: 1px solid var(--line);
+  background: var(--bar-bg, #f3f1ee);
+  border-bottom: 1px solid var(--bar-line, rgba(0, 0, 0, 0.06));
 }
-.project-bar i { width: 7px; height: 7px; border-radius: 50%; background: color-mix(in srgb, var(--fg) 20%, var(--bg)); }
-.project-bar span { margin-left: 10px; width: 38%; height: 9px; border-radius: var(--radius-pill); background: color-mix(in srgb, var(--fg) 8%, var(--bg)); }
+.project-bar i { width: 7px; height: 7px; border-radius: 50%; background: var(--bar-dot, #d6d1cb); }
+.project-bar span { margin-left: 10px; width: 38%; height: 9px; border-radius: var(--radius-pill); background: var(--bar-dot, #d6d1cb); opacity: 0.6; }
+
+/* Per-project panel colours, matched to each project's own detail-page
+   gradient: --stage = panel background, --tint = the glass tint,
+   --tag-bg / --tag-ink = the flying labels, --bar-* = the browser bar. */
+.stage--someone {
+  --tint: #d7bccd;
+  --stage: linear-gradient(135deg, #b88aa9 0%, #d9c0cf 40%, #eadde4 65%, #c69cb6 100%);
+  --tag-bg: #5b2342; --tag-ink: #f7ecf2;   /* Someone.health plum */
+}
+.stage--healthbright {
+  --tint: #f2e4c6;
+  --stage: linear-gradient(135deg, #f8f2e7 0%, #f3e7cf 45%, #f8d68f 100%);
+  --tag-bg: #f6c35a; --tag-ink: #173a33;   /* HealthBright sunflower + forest */
+}
+.stage--tapas {
+  --tint: #d9cff3;
+  --stage: linear-gradient(120deg, #c3abf5 0%, #e2ddf3 38%, #bdd9f4 70%, #b4eada 100%);
+  --tag-bg: #7b5cf2; --tag-ink: #ffffff;   /* Tapas purple */
+}
+.stage--resident {
+  --tint: #1d302c;
+  --stage: radial-gradient(110% 110% at 0% 100%, #4b1519 0%, transparent 48%),
+           linear-gradient(135deg, #24403a 0%, #142621 55%, #0d1714 100%);
+  --tag-bg: #7d1c22; --tag-ink: #f4e8e8;   /* blood red */
+  --bar-bg: #161b1a; --bar-line: rgba(255, 255, 255, 0.06); --bar-dot: #3a4240;
+}
 .project-shot { position: relative; aspect-ratio: 16 / 10; background: var(--surface); }
 .project-shot img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -694,8 +720,8 @@ html[data-motion="calm"] .scroll-hint .wheel { animation: none; }
   position: absolute; left: 50%; top: 40%; z-index: 1;
   padding: 7px 18px 9px;
   border-radius: 12px;
-  background: color-mix(in srgb, var(--accent) 55%, var(--tint));
-  color: var(--on-accent);
+  background: var(--tag-bg, color-mix(in srgb, var(--accent) 55%, var(--tint)));
+  color: var(--tag-ink, var(--on-accent));
   font-family: var(--font-serif); font-size: clamp(1rem, 0.8rem + 0.8vw, 1.45rem);
   white-space: nowrap;
   box-shadow: 0 8px 18px -8px rgba(0, 0, 0, 0.3);
