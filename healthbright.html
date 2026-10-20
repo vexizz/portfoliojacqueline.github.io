@@ -117,12 +117,6 @@
           </ul>
         </div>
       </div>
-
-      <div class="gallery">
-        <figure class="shot shot--two-thirds" data-lightbox data-cursor="Zoom" data-reveal>
-          <div class="shot-media"><img src="pictures/Struggling.gif" alt="What it shows"></div>
-        </figure>
-      </div>
     </section>
 
     <!-- ============================ GOALS ============================ -->
@@ -143,7 +137,7 @@
       <div class="gallery">
         <figure class="shot shot--full" data-lightbox data-cursor="Zoom" data-reveal>
           <div class="shot-media"><img src="pictures/HealthBrightDesktopExploration.png" alt="What it shows"></div>
-          <figcaption>Early dashboard explorations for the desktop layout.</figcaption>
+          <figcaption>Design 1 out of 2: Early dashboard explorations for the desktop layout.</figcaption>
         </figure>
         <figure class="shot shot--full" data-lightbox data-cursor="Zoom" data-reveal>
           <div class="shot-media"><img src="pictures/HealthBrightMobileExploration.png" alt="What it shows"></div>
@@ -170,13 +164,33 @@
         </div>
       </div>
       <div class="gallery">
+        <!-- Before / After comparison: move the pointer from right to left
+             (or drag on touch screens, or use the arrow keys) to wipe from
+             Before to After. The After image is pictures/HealthBrightAfterSeconds.png;
+             export it at the same size as the Before image. -->
+        <figure class="shot shot--full compare" data-compare data-cursor="Drag" data-reveal tabindex="0"
+                role="slider" aria-label="Before and after comparison" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="shot-media">
+            <img src="pictures/HealthBrightBeforeSeconds.png" alt="What it shows">
+            <div class="compare-after">
+              <img src="pictures/HealthBrightAfterSeconds.png" alt="Test results after the redesign" onerror="this.closest('.compare-after').classList.add('is-missing')">
+              <span class="compare-missing">Add pictures/HealthBrightAfterSeconds.png</span>
+            </div>
+            <span class="compare-label compare-label--before" aria-hidden="true">Before</span>
+            <span class="compare-label compare-label--after" aria-hidden="true">After</span>
+            <span class="compare-handle" aria-hidden="true"></span>
+          </div>
+          <figcaption>Lyssna test results from having interviewed 24 participants on what they think of the site.</figcaption>
+        </figure>
+      </div>
+      <div class="gallery">
         <figure class="shot shot--half" data-lightbox data-cursor="Zoom" data-reveal>
           <div class="shot-media"><img src="pictures/HealthbrightDesktopWireframes.png" alt="Desktop wireframes"></div>
-          <figcaption>Final dashboard on desktop.</figcaption>
+          <figcaption>Design 2: Improved dashboard on desktop, taken from user feedback and testing.</figcaption>
         </figure>
         <figure class="shot shot--half" data-lightbox data-cursor="Zoom" data-reveal style="--delay: 1">
           <div class="shot-media"><img src="pictures/HealthbrightMobileWireframes.png" alt="Mobile wireframes"></div>
-          <figcaption>Final dashboard on mobile.</figcaption>
+          <figcaption>Its mobile variant's dashboard.</figcaption>
         </figure>
       </div>
     </section>
@@ -202,23 +216,26 @@
         </figure>
       </div>
       <div class="gallery">
-        <!-- Before / After comparison: move the pointer from right to left
-             (or drag on touch screens, or use the arrow keys) to wipe from
-             Before to After. The After image is pictures/HealthBrightAfterSeconds.png;
-             export it at the same size as the Before image. -->
-        <figure class="shot shot--full compare" data-compare data-cursor="Drag" data-reveal tabindex="0"
-                role="slider" aria-label="Before and after comparison" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-          <div class="shot-media">
-            <img src="pictures/HealthBrightBeforeSeconds.png" alt="What it shows">
-            <div class="compare-after">
-              <img src="pictures/HealthBrightAfterSeconds.png" alt="Test results after the redesign" onerror="this.closest('.compare-after').classList.add('is-missing')">
-              <span class="compare-missing">Add pictures/HealthBrightAfterSeconds.png</span>
-            </div>
-            <span class="compare-label compare-label--before" aria-hidden="true">Before</span>
-            <span class="compare-label compare-label--after" aria-hidden="true">After</span>
-            <span class="compare-handle" aria-hidden="true"></span>
-          </div>
-          <figcaption>Lyssna test results from having interviewed 24 participants on what they think of the site.</figcaption>
+        <figure class="shot shot--full" data-lightbox data-cursor="Zoom" data-reveal>
+          <div class="shot-media"><img src="pictures/HealthyMobile.png" alt="What it shows"></div>
+          <figcaption>Final mobile interface design, fully coded with transitions as it scrolls down after mock-up prototypes on Figma.</figcaption>
+        </figure>
+      </div>
+      <div class="gallery">
+        <figure class="shot shot--full" data-lightbox data-cursor="Zoom" data-reveal>
+          <div class="shot-media"><img src="pictures/HealthyDesktop1.png" alt="What it shows"></div>
+        </figure>
+      </div>
+      <div class="gallery">
+        <figure class="shot shot--full" data-lightbox data-cursor="Zoom" data-reveal>
+          <div class="shot-media"><img src="pictures/HealthyDesktop2.png" alt="What it shows"></div>
+          <figcaption>Final desktop variant, coded with transitions as it scrolls down after mock-up prototypes on Figma.</figcaption>
+        </figure>
+      </div>
+      <div class="gallery">
+        <figure class="shot shot--full" data-lightbox data-cursor="Zoom" data-reveal>
+          <div class="shot-media"><img src="pictures/HealthyScroll.gif" alt="What it shows"></div>
+          <figcaption>Animations and transitions coded, concepted, and designed.</figcaption>
         </figure>
       </div>
     </section>

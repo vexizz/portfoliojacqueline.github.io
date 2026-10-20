@@ -36,10 +36,10 @@
 :root {
   /* --- Raw palette ------------------------------------------------- */
   /* Never pure black/white: slightly warm neutrals feel softer. */
-  --ink:        #100505;   /* deep wine-brown: text in light mode, background in dark mode */
+  --ink:        #060510;   /* deep wine-brown: text in light mode, background in dark mode */
   --paper:      #f5f2ec;   /* cream: background in light mode, text in dark mode */
-  --green:      #45b26b;   /* the one accent colour: a bright leaf green */
-  --green-deep: #1d6b3e;   /* darker green for small text on cream (meets contrast) */
+  --green:      #f2c230;   /* the one accent colour: a warm sunflower yellow (fills, with dark text on top) */
+  --green-deep: #b58c1a;   /* deep golden ochre for small accent text on cream (meets contrast) */
 
   /* --- Semantic colours (use THESE in components) ------------------ */
   --bg:         var(--paper);
@@ -49,7 +49,7 @@
   --surface:    color-mix(in srgb, var(--fg) 4%,  var(--bg));  /* cards, placeholders */
   --accent:     var(--green);
   --accent-text: var(--green-deep);  /* accent used as text */
-  --on-accent:  var(--ink);          /* dark text on the bright green (better contrast) */
+  --on-accent:  var(--ink);          /* dark text on the bright yellow (better contrast) */
   --selection:  color-mix(in srgb, var(--green) 30%, transparent);
 
   /* --- Typography ---------------------------------------------------- */
@@ -122,8 +122,8 @@
     color-scheme: dark;
     --bg:          var(--ink);
     --fg:          var(--paper);
-    --accent:      #7fe3a1;
-    --accent-text: #7fe3a1;
+    --accent:      #ffd25e;
+    --accent-text: #ffd25e;
     --on-accent:   var(--ink);
   }
 }
@@ -131,8 +131,8 @@
   color-scheme: dark;
   --bg:          var(--ink);
   --fg:          var(--paper);
-  --accent:      #7fe3a1;
-  --accent-text: #7fe3a1;
+  --accent:      #ffd25e;
+  --accent-text: #ffd25e;
   --on-accent:   var(--ink);
 }
 
@@ -1042,7 +1042,7 @@ html[data-cursor="off"] .cursor, html[data-cursor="off"] .px-trail { display: no
 /* Cursor-following glow */
 .cs-hero::before {
   content: ""; position: absolute; inset: 0; z-index: -1;
-  background: radial-gradient(500px circle at var(--gx, 50%) var(--gy, 40%), rgba(180, 240, 190, 0.22), transparent 60%);
+  background: radial-gradient(500px circle at var(--gx, 50%) var(--gy, 40%), rgba(255, 220, 130, 0.2), transparent 60%);
   transition: background-position var(--dur-med);
   pointer-events: none;
 }
@@ -1123,8 +1123,8 @@ html[data-cursor="off"] .cursor, html[data-cursor="off"] .px-trail { display: no
 .site-header--over:not(.is-scrolled) .header-time { color: rgba(243, 242, 238, 0.7); }
 .site-header--over:not(.is-scrolled) .nav a, .site-header--over:not(.is-scrolled) .nav button { color: #efe6d8; background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.22); }
 .site-header--over:not(.is-scrolled) .nav a:hover, .site-header--over:not(.is-scrolled) .nav button:hover { border-color: #efe6d8; }
-.site-header--over:not(.is-scrolled) .nav a[aria-current="page"] { background: #7fe3a1; border-color: #7fe3a1; color: #1d1a14; }
-.site-header--over:not(.is-scrolled) .logo-dot { background: #7fe3a1; }
+.site-header--over:not(.is-scrolled) .nav a[aria-current="page"] { background: #ffd25e; border-color: #ffd25e; color: #1d1a14; }
+.site-header--over:not(.is-scrolled) .logo-dot { background: #ffd25e; }
 /* Once you start scrolling (but are still over the green), the header
    turns into dark frosted glass so hero text can't clash with it. */
 .site-header--over.is-moved:not(.is-scrolled) {
@@ -1815,9 +1815,9 @@ html[data-contrast="high"] {
   --accent-text: color-mix(in srgb, var(--green-deep) 80%, #000);
 }
 @media (prefers-color-scheme: dark) {
-  html:not([data-theme="light"])[data-contrast="high"] { --accent-text: #aaf2c4; }
+  html:not([data-theme="light"])[data-contrast="high"] { --accent-text: #ffe49a; }
 }
-html[data-theme="dark"][data-contrast="high"] { --accent-text: #aaf2c4; }
+html[data-theme="dark"][data-contrast="high"] { --accent-text: #ffe49a; }
 
 /* Switching theme in Settings: colours cross-fade instead of snapping. */
 html.theme-switching *, html.theme-switching *::before, html.theme-switching *::after {
