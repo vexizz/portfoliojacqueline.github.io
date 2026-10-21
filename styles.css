@@ -36,8 +36,8 @@
 :root {
   /* --- Raw palette ------------------------------------------------- */
   /* Never pure black/white: slightly warm neutrals feel softer. */
-  --ink:        #060510;   /* deep wine-brown: text in light mode, background in dark mode */
-  --paper:      #f5f2ec;   /* cream: background in light mode, text in dark mode */
+  --ink:        #020019fe;   /* deep wine-brown: text in light mode, background in dark mode */
+  --paper:      #f5eedf;   /* cream: background in light mode, text in dark mode */
   --green:      #f2c230;   /* the one accent colour: a warm sunflower yellow (fills, with dark text on top) */
   --green-deep: #b58c1a;   /* deep golden ochre for small accent text on cream (meets contrast) */
 
