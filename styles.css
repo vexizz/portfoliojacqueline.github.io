@@ -1310,6 +1310,10 @@ html[data-cursor="off"] .cursor, html[data-cursor="off"] .px-trail { display: no
 .cs-block-head .label { display: block; margin-bottom: var(--space-3); font-size: var(--text-base); }
 .cs-block-head h2 { font-size: var(--text-2xl); }
 .cs-block-body { grid-column: 6 / -1; }
+/* Safety net: a picture row (or picture) placed inside a text block still
+   spans the full width instead of being squeezed into a column. */
+.cs-block > .gallery,
+.cs-block > .shot { grid-column: 1 / -1; }
 .cs-block-body p { font-size: var(--text-lg); }
 .cs-block-body p + p { margin-top: var(--space-4); }
 
@@ -1611,23 +1615,27 @@ html[data-cursor="off"] .cursor, html[data-cursor="off"] .px-trail { display: no
 .chip[aria-pressed="true"] { background: var(--fg); border-color: var(--fg); color: var(--bg); }
 
 /* Masonry: CSS columns, so every image keeps its own shape. */
-.play-grid { columns: 3 280px; column-gap: var(--space-5); }
+/* One piece per row, full page width, each at its own natural shape. */
+.play-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-8); }
 .play-item {
-  break-inside: avoid;
-  margin-bottom: var(--space-6);
-  --tilt: -1.5deg;
+  --tilt: 0deg;
   transition: transform var(--dur-med) var(--ease-spring);
 }
-.play-item:nth-child(even) { --tilt: 1.5deg; }
-.play-item:hover { transform: translateY(-6px) rotate(var(--tilt)); }
+.play-item .shot-media { transition: box-shadow var(--dur-med) var(--ease-out), border-radius var(--dur-med) var(--ease-spring); }
+.play-item:hover { transform: translateY(-6px); }
+/* Each piece sits in a full-width panel. Wide pieces fill it edge to edge;
+   tall ones are capped at about one screen high and centred, still whole. */
+.play-item .shot-media { display: flex; justify-content: center; background: var(--surface); }
+.play-item .shot-media > img { width: auto; max-width: 100%; max-height: 88vh; }
+.play-item:hover .shot-media { box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.55); }
 .play-item figcaption { justify-content: space-between; align-items: baseline; }
-.play-item figcaption span:first-child { font-family: var(--font-serif); font-size: 1.25rem; color: var(--fg); }
+.play-item figcaption span:first-child { font-family: var(--font-serif); font-size: clamp(1.35rem, 1.1rem + 0.8vw, 1.8rem); color: var(--fg); }
 .play-item.is-hidden { display: none; }
 /* Play pictures keep their own original shape: no fixed frame, no
    cropping or zooming. (Only an empty placeholder uses --ratio.) */
 .play-item .shot-media { aspect-ratio: auto; }
 .play-item .shot-media:has(.shot-placeholder) { aspect-ratio: var(--ratio, 4 / 3); }
-.play-item .shot-media > img,
+.play-item .shot-media > img { height: auto; object-fit: initial; } /* width/max-height set above */
 .play-item .shot-media > video { width: 100%; height: auto; object-fit: initial; }
 .play-item:hover .shot-media > img { transform: none; } /* no zoom on hover */
 
